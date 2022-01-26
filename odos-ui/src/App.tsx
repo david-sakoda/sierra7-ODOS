@@ -44,7 +44,7 @@ function Home() {
     <>
       <main>
         <h2>Welcome to the homepage!</h2>
-        <Button onClick={()=>Dendogram({height: 1000, width:1000, data: SampleData})}>Load D3</Button>
+        <Button onClick={()=>Dendogram({height: 800, width:800, data: SampleData})}>Load D3</Button>
         <D3Container id="d3-container">
           
         </D3Container>
