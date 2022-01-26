@@ -29,7 +29,7 @@ const GraphContainer = styled.div`
 
 const getRandomColor = () => Math.floor(Math.random() * 16777215).toString(16);
 
-const NodeToolTip = (props: NodeTooltipProps<ODOSNode>) => {
+const ToolTip = (props: NodeTooltipProps<ODOSNode>) => {
   return (
     <div style={{display:"flex", flexDirection:"column", backgroundColor: "white", border: "1px solid grey", borderRadius: "2px", padding: "8px"}}>
       <span>Name: {props.node.data.name}</span>
@@ -43,10 +43,10 @@ export const Graph = ({ data }: GraphProps) => {
     <GraphContainer className="Graph-Vis">
       <ResponsiveNetwork
         data={data}
-        repulsivity={6}
+        repulsivity={40}
         linkBlendMode="multiply"
         motionConfig="wobbly"
-        nodeTooltip={NodeToolTip}
+        nodeTooltip={ToolTip}
         nodeColor={function (e) {
           return `#${getRandomColor()}`;
         }}
