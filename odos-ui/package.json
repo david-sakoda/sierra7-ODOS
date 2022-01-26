@@ -12,6 +12,7 @@
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
+    "@visx/visx": "^2.8.0",
     "d3": "^7.3.0",
     "husky": "^7.0.4",
     "lint-staged": "^12.3.1",
@@ -53,6 +54,7 @@
   },
   "devDependencies": {
     "@types/d3": "^7.1.0",
+    "@types/d3-shape": "^3.0.2",
     "@types/jest": "^27.4.0",
     "@types/node": "^16.11.21",
     "@types/react": "^17.0.38",

@@ -1,6 +1,6 @@
 import "./App.css";
 import { Link, Route, Routes, BrowserRouter as Router } from "react-router-dom";
-import { Footer, Graph, Header } from "./components";
+import { Dendogram, Footer, Graph, Header } from "./components";
 
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
@@ -8,6 +8,10 @@ import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 
 import data from "./resources/sample";
+import { useEffect } from "react";
+import { SampleData } from "./components/shared/Dendogram";
+import { Button } from "@mui/material";
+import styled from "@emotion/styled";
 
 function App() {
   return (
@@ -24,14 +28,26 @@ function App() {
     </div>
   );
 }
+const D3Container = styled.div`
+height: calc(100% / 2);
+width: 100vw;
+.link {
+  fill: none;
+  stroke: #ccc;
+  stroke-width: 1.5px;
+}
 
+`
 function Home() {
-
+  
   return (
     <>
       <main>
         <h2>Welcome to the homepage!</h2>
-        <Graph data={data} />
+        <Button onClick={()=>Dendogram({height: 1000, width:1000, data: SampleData})}>Load D3</Button>
+        <D3Container id="d3-container">
+          
+        </D3Container>
       </main>
       <nav>
         <Link to="/about">About</Link>

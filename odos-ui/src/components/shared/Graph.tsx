@@ -2,7 +2,6 @@ import {
   ResponsiveNetwork,
   InputNode,
   InputLink,
-  NodeTooltip,
   NodeTooltipProps,
 } from "@nivo/network";
 import styled from "@emotion/styled";
