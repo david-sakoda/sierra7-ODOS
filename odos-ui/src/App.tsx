@@ -1,30 +1,34 @@
 import "./App.css";
 import { Link, Route, Routes, BrowserRouter as Router } from "react-router-dom";
-import { Dendogram, Footer, Graph, Header } from "./components";
+import { Dendogram, Footer, Graph, Header, PrivateRoute } from "./components";
 
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 
-import data from "./resources/sample";
+
 import { useEffect } from "react";
 import { SampleData } from "./components/shared/Dendogram";
-import { Button } from "@mui/material";
+
 import styled from "@emotion/styled";
+import { ReactKeycloakProvider } from "@react-keycloak/web";
+import keycloak from "./keycloak"
 
 function App() {
   return (
     <div className="App">
+      <ReactKeycloakProvider authClient={keycloak} initOptions={{ onLoad: 'login-required' }}>
       <Header />
       <Router>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<PrivateRoute><Home /></PrivateRoute>} />
           <Route path="about" element={<About />} />
         </Routes>
       </Router>
 
       <Footer />
+      </ReactKeycloakProvider>
     </div>
   );
 }
@@ -39,12 +43,12 @@ width: 100vw;
 
 `
 function Home() {
-  
+  useEffect(()=> Dendogram({height:800, width: 800, data:SampleData}))
   return (
     <>
       <main>
         <h2>Welcome to the homepage!</h2>
-        <Button onClick={()=>Dendogram({height: 800, width:800, data: SampleData})}>Load D3</Button>
+        
         <D3Container id="d3-container">
           
         </D3Container>
