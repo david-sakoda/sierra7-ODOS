@@ -15,223 +15,253 @@
  * limitations under the License.
  */
 
- body {
-    background-color: #f0f0f0;
-    background-size: cover;
-    background-repeat: no-repeat;
-    font-size: 14px;
-    font-family: Roboto, "Helvetica Neue", sans-serif;
-    margin: 0;
-  }
-  
-  div#kc-content {
-    margin: auto;
-    max-width: 681px;
-    width: max-content;
-    background-color: #ffffff;
-    padding: 32px 75px;
-    border: 2px solid #858585;
-    opacity: 1;
-    border-radius: 32px;
-    min-height: 220px;
-    min-width: 400px;
-    box-shadow: -3px 2px 5px #777777;
-  }
-  
-  div#kc-content-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  
-  div#kc-form {
-    float: left;
-  }
-  
-  div#kc-form label {
-    display: block;
-    font-size: 14px;
-    margin-bottom: 4px;
-  }
-  
-  div#info-area {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    margin-top: 40px;
-    background-color: rgba(0, 0, 0, 0.4);
-    padding: 20px;
-    width: 100%;
-  }
-  
-  div#info-area p {
-    margin-right: 30px;
-    display: inline;
-    text-shadow: none;
-  }
-  
-  input[type="text"],
-  input[type="password"] {
-    font-size: 14px;
-    /* margin-bottom: 20px; */
-    background-color: #ffffff;
-    border: 1px solid #e0e0e0;
-    border-radius: 4px;
-    padding: 4px 8px;
-    height: 32px;
-    width: calc(100% - 20px);
-    box-shadow: 0 0 3px #efefef;
-  }
-  
-  input[type="submit"] {
-    border: none;
-    border-radius: 4px;
-    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.5);
-    background: rgba(25, 71, 117, 1) 0% 0% no-repeat padding-box;
-    font-size: 14px;
-    font-weight: bold;
-    color: #ffffff;
-    padding: 10px;
-    margin-top: 20px;
-    margin-right: 10px;
-    width: 100%;
-  }
-  
-  input[type="submit"]:hover {
-    background-color: rgba(25, 71, 117, 0.9);
-  }
-  
-  div#kc-form-options div {
-    display: inline-block;
-    margin-right: 20px;
-    font-size: 14px;
-  }
-  
-  div#kc-form-options div label {
-    font-size: 14px;
-  }
-  
-  div#kc-feedback {
-    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.5);
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    text-align: center;
-  }
-  
-  div#kc-feedback-wrapper {
-    padding: 1em;
-  }
-  
-  div.feedback-success {
-    background-color: rgba(155, 155, 255, 0.1);
-  }
-  
-  div.feedback-warning {
-    background-color: rgba(255, 175, 0, 0.1);
-  }
-  
-  div.feedback-error {
-    background-color: rgba(255, 0, 0, 0.1);
-  }
-  
-  div#kc-header {
-    display: none;
-  }
-  
-  div#kc-registration {
-    margin-bottom: 20px;
-  }
-  
-  #kc-registration > span {
-    margin-top: 20px;
-  }
-  
-  span[id^="input-error"] {
-    color: orangered;
-    position: relative;
-  }
-  
-  #kc-social-providers {
-    background-color: rgba(3, 70, 114, 0.15);
-    border: 0 solid rgba(0, 0, 0, 0.2);
-    box-shadow: inset 0 0 2px 2px rgba(0, 0, 0, 0.15);
-    padding: 20px;
-    margin: 20px 0;
-    text-align: center;
-    width: 276px;
-  }
-  
-  #kc-social-providers ul {
-    margin: 0;
-    padding: 0;
-  }
-  
-  #kc-social-providers a {
-    display: block;
-    text-decoration: none;
-    padding: 10px;
-    margin: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    background-color: rgba(255, 255, 255, 0.2);
-  }
-  
-  #kc-social-providers a:hover {
-    background-color: rgba(3, 70, 114, 0.4);
-  }
-  
-  #kc-register-form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  
-  fieldset {
-    border: none;
-    padding: 0px;
-  }
-  
-  .visually-hidden {
-    position: absolute !important;
-    height: 1px;
-    width: 1px;
-    overflow: hidden;
-    clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
-    clip: rect(1px, 1px, 1px, 1px);
-    white-space: nowrap; /* added line */
-  }
-  
-  #kc-register-form input[type="text"] {
-    width: calc(100%);
-  }
-  
-  
-  header {
-    text-align: center;
-  }
-  
-  
-  .alert {
-    border-radius: 3px;
-    padding: 0 4px;
-    border-left-style: solid;
-    border-left-width: 5px;
-    padding: 10px;
-  }
-  .alert-success {
-    background-color: #E4F1E1;
-    border-left-color: #4B9E39;
-  }
-  .alert-error {
-    background-color: #F8E7E7;
-    border-left-color: #B91415;
-  }
-  .alert-warning {
-    background-color: rgb(255, 236, 179);
-    border-left-color: rgb(217, 163, 0)
-  }
-  .alert-info {
-    background-color: #E4F3FA;
-    border-left-color: #5994B2;
-  }
+body {
+  background-color: #f0f0f0;
+  background-size: cover;
+  background-repeat: no-repeat;
+  font-size: 14px;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  margin: 0;
+}
+
+div#kc-content {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  max-width: 480px;
+  width: max-content;
+  background-color: #ffffff;
+  border: 2px solid #dddddd;
+  opacity: 1;
+  min-height: 220px;
+  min-width: 400px;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2),
+    0 1px 5px 0 rgba(0, 0, 0, 0.12);
+}
+
+div#odos-header {
+  background: #003366;
+  padding-bottom: 8px;
+}
+div#odos-header .row {
+  float: left;
+  display: block;
+  display: flex;
+}
+div#odos-header .row div {
+  display: flex;
+  align-items: center;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 4px;
+}
+div#odos-header .row img {
+  display: inline;
+  height: 60px;
+  margin-top: 10px;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+div#kc-content-wrapper {
+  padding: 0px 16px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+div#kc-form {
+  float: left;
+}
+
+div#kc-form label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+div#info-area {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  margin-top: 40px;
+  background-color: rgba(0, 0, 0, 0.4);
+  padding: 20px;
+  width: 100%;
+}
+
+div#info-area p {
+  margin-right: 30px;
+  display: inline;
+  text-shadow: none;
+}
+
+input[type="text"],
+input[type="password"] {
+  font-size: 14px;
+  /* margin-bottom: 20px; */
+  background-color: #ffffff;
+  border: 1px solid #c0c2c4;
+  border-radius: 2px;
+  padding: 4px 8px;
+  height: 32px;
+  width: calc(100% - 20px);
+  box-shadow: none;
+  transition: all 0.3s ease-in-out, padding 1ms;
+}
+
+input[type="submit"] {
+  border: none;
+  border-radius: 2px;
+  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.5);
+  background: rgba(25, 71, 117, 1) 0% 0% no-repeat padding-box;
+  font-size: 14px;
+  font-weight: bold;
+  color: #ffffff;
+  padding: 10px;
+  margin-top: 20px;
+  margin-right: 10px;
+  width: 100%;
+}
+
+input[type="submit"]:hover {
+  background-color: rgba(25, 71, 117, 0.9);
+}
+
+div#kc-form-options div {
+  display: inline-block;
+  margin-right: 20px;
+  font-size: 14px;
+}
+
+div#kc-form-options div label {
+  font-size: 14px;
+}
+
+div#kc-feedback {
+  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
+
+div#kc-feedback-wrapper {
+  padding: 1em;
+}
+.required::after {
+  content: " *";
+  color: #ff0000;
+}
+
+div.feedback-success {
+  background-color: rgba(155, 155, 255, 0.1);
+}
+
+div.feedback-warning {
+  background-color: rgba(255, 175, 0, 0.1);
+}
+
+div.feedback-error {
+  background-color: rgba(255, 0, 0, 0.1);
+}
+
+div#kc-header {
+  display: none;
+}
+
+div#kc-registration {
+  margin-bottom: 20px;
+}
+
+#kc-registration > span {
+  margin-top: 20px;
+}
+
+span[id^="input-error"] {
+  color: orangered;
+  position: relative;
+}
+
+#kc-social-providers {
+  background-color: rgba(3, 70, 114, 0.15);
+  border: 0 solid rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0 0 2px 2px rgba(0, 0, 0, 0.15);
+  padding: 20px;
+  margin: 20px 0;
+  text-align: center;
+  width: 276px;
+}
+
+#kc-social-providers ul {
+  margin: 0;
+  padding: 0;
+}
+
+#kc-social-providers a {
+  display: block;
+  text-decoration: none;
+  padding: 10px;
+  margin: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+#kc-social-providers a:hover {
+  background-color: rgba(3, 70, 114, 0.4);
+}
+
+#kc-register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+fieldset {
+  border: none;
+  padding: 0px;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+  clip: rect(1px, 1px, 1px, 1px);
+  white-space: nowrap; /* added line */
+}
+
+#kc-register-form input[type="text"] {
+  width: calc(100%);
+}
+
+header {
+  text-align: center;
+}
+
+.alert {
+  border-radius: 3px;
+  padding: 0 4px;
+  border-left-style: solid;
+  border-left-width: 5px;
+  padding: 10px;
+}
+.alert-success {
+  background-color: #e4f1e1;
+  border-left-color: #4b9e39;
+}
+.alert-error {
+  background-color: #f8e7e7;
+  border-left-color: #b91415;
+}
+.alert-warning {
+  background-color: rgb(255, 236, 179);
+  border-left-color: rgb(217, 163, 0);
+}
+.alert-info {
+  background-color: #e4f3fa;
+  border-left-color: #5994b2;
+}

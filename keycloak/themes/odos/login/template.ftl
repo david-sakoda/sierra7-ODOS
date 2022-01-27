@@ -44,7 +44,7 @@
         </div>
     </div>
     <div class="${properties.kcFormCardClass!}">
-        <header class="${properties.kcFormHeaderClass!}">
+        <header class="${properties.kcFormHeaderClass!} visually-hidden">
             <#if realm.internationalizationEnabled  && locale.supported?size gt 1>
                 <div id="kc-locale">
                     <div id="kc-locale-wrapper" class="${properties.kcLocaleWrapperClass!}">
@@ -107,6 +107,12 @@
       </header>
 
       <div id="kc-content">
+        <div id="odos-header">
+            <div class="row">
+                <img alt="USCIS" src="${url.resourcesPath}/img/dhs.png" />
+                <div><span>ODOS Tech Challenge</span></div>
+            </div>
+        </div>
         <div id="kc-content-wrapper">
 
           <#-- App-initiated actions should not see warning messages about the need to complete the action -->
