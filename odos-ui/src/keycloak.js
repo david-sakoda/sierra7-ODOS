@@ -8,4 +8,6 @@ const config = {
 
 const keycloak = new Keycloak(config);
 
+export const doLogout = ()=> {keycloak.logout()}
+
 export default keycloak;
