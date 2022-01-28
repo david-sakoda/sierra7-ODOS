@@ -6,6 +6,7 @@
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
     "@fontsource/roboto": "^4.5.1",
+    "@mui/icons-material": "^5.3.1",
     "@mui/material": "^5.3.1",
     "@nivo/core": "^0.79.0",
     "@nivo/network": "^0.79.1",
@@ -20,8 +21,10 @@
     "lint-staged": "^12.3.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-query": "^3.34.12",
     "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.0",
+    "react-truncate": "^2.4.0",
     "typescript": "^4.5.5",
     "web-vitals": "^2.1.4"
   },
@@ -61,6 +64,7 @@
     "@types/node": "^16.11.21",
     "@types/react": "^17.0.38",
     "@types/react-dom": "^17.0.11",
+    "@types/react-truncate": "^2.3.4",
     "prettier": "^2.5.1",
     "resize-observer-polyfill": "^1.5.1"
   },
