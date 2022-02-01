@@ -5,7 +5,7 @@ import { MovieCard } from "..";
 
 const Container = styled.div`
   height: calc(100% / 2);
-  width: 100vw;
+  width: calc(100vw - 32px);
   display: grid;
   gap: 32px;
   padding: 16px;
@@ -13,30 +13,28 @@ const Container = styled.div`
 `;
 
 export const Search = () => {
-    const [queryRefetch, setQueryFetch] = useState(true);
-  const { isLoading, error, data, isFetching } = useQuery(
-    "repoData",
-    () =>
-      fetch(
-        "https://15677b7a-534d-4ec6-bd71-83e1d19d8ec7.mock.pstmn.io/odos/movies"
-      ).then((res) => res.json())
+  const [queryRefetch, setQueryFetch] = useState(true);
+  const { isLoading, error, data, isFetching } = useQuery("repoData", () =>
+    fetch(
+      "https://15677b7a-534d-4ec6-bd71-83e1d19d8ec7.mock.pstmn.io/odos/movies"
+    ).then((res) => res.json())
   );
 
-  if(data && !isLoading)
-  return (
-    <Container>
-      {!isLoading &&
-        !error &&
-        Array.isArray(data) &&
-        data.map((e: any) => (
-          <MovieCard
-            id={e.id}
-            name={e.name}
-            description={e.description}
-            url={e.url}
-          />
-        ))}
-    </Container>
-  );
-  else return <Container />
+  if (data && !isLoading)
+    return (
+      <Container>
+        {!isLoading &&
+          !error &&
+          Array.isArray(data) &&
+          data.map((e: any) => (
+            <MovieCard
+              id={e.id}
+              name={e.name}
+              description={e.description}
+              url={e.url}
+            />
+          ))}
+      </Container>
+    );
+  else return <Container />;
 };

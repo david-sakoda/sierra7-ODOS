@@ -1,9 +1,7 @@
 import styled from "@emotion/styled";
 import { Button, Link } from "@mui/material";
-import { useState } from "react";
 import { useQuery } from "react-query";
-import { Link as RouterLink, useParams, Navigate } from "react-router-dom";
-import { MovieCard } from "..";
+import { Link as RouterLink, useParams } from "react-router-dom";
 
 const Container = styled.div`
   margin: 32px auto;
@@ -25,23 +23,23 @@ export const Dossier = () => {
       fetch(
         `https://15677b7a-534d-4ec6-bd71-83e1d19d8ec7.mock.pstmn.io/odos/movies/${params.id}`
       ).then((res) => res.json())
-    // {
-    //   enabled: queryRefetch,
-    //   onSettled: ()=> setQueryFetch(false)
-    // }
   );
-  if(data && !isLoading)
-  return (
-    <Container>
-      <img alt={data.name} src={data.url} />
-      <div>
-        <Button variant="outlined"><Link component={RouterLink} to="/">Back</Link></Button>
-        <h2>{data.name}</h2>
-        <p>
-          <span>{data.description}</span>
-        </p>
-      </div>
-    </Container>
-  );
-  else return <Container />
+  if (data && !isLoading)
+    return (
+      <Container>
+        <img alt={data.name} src={data.url} />
+        <div>
+          <Button variant="outlined">
+            <Link component={RouterLink} to="/">
+              Back
+            </Link>
+          </Button>
+          <h2>{data.name}</h2>
+          <p>
+            <span>{data.description}</span>
+          </p>
+        </div>
+      </Container>
+    );
+  else return <Container />;
 };

@@ -3,10 +3,9 @@ import { useEffect } from "react";
 import { useQuery } from "react-query";
 import { Dendogram } from "..";
 
-
 const D3Container = styled.div`
   height: calc(100% / 2);
-  width: 100vw;
+  width: calc(100vw - 32px);
   .link {
     fill: none;
     stroke: #ccc;
