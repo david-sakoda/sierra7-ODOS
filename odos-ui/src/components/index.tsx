@@ -1,11 +1,11 @@
-import { Header } from "./Header";
-import { Footer } from "./Footer";
-import { Graph } from "./shared/Graph";
-import {Dendogram}  from "./shared/Dendogram";
-import {PrivateRoute} from "./shared/PrivateRoute"
-import { Visualization } from "./Visualization";
-import { Search } from "./Search";
-import {MovieCard} from "./shared/MovieCard";
 import { Dossier } from "./Dossier";
+import { Footer } from "./Footer";
+import { Header } from "./Header";
+import { Search } from "./Search";
+import { Dendogram } from "./shared/Dendogram";
+import { Graph } from "./shared/Graph";
+import { MovieCard } from "./shared/MovieCard";
+import { PrivateRoute } from "./shared/PrivateRoute";
+import { Visualization } from "./Visualization";
 
 export { Header, Footer, Graph, Dendogram, PrivateRoute, Visualization, Search, MovieCard, Dossier };

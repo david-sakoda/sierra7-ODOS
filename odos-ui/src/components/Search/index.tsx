@@ -19,17 +19,15 @@ export const Search = () => {
     () =>
       fetch(
         "https://15677b7a-534d-4ec6-bd71-83e1d19d8ec7.mock.pstmn.io/odos/movies"
-      ).then((res) => res.json()),
-    {
-      enabled: queryRefetch,
-      onSettled: ()=> setQueryFetch(false)
-    }
+      ).then((res) => res.json())
   );
 
+  if(data && !isLoading)
   return (
     <Container>
       {!isLoading &&
         !error &&
+        Array.isArray(data) &&
         data.map((e: any) => (
           <MovieCard
             id={e.id}
@@ -40,4 +38,5 @@ export const Search = () => {
         ))}
     </Container>
   );
+  else return <Container />
 };

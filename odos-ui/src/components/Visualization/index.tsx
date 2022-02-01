@@ -1,9 +1,8 @@
 import styled from "@emotion/styled";
-
 import { useEffect } from "react";
 import { useQuery } from "react-query";
 import { Dendogram } from "..";
-import { SampleData } from "../shared/Dendogram";
+
 
 const D3Container = styled.div`
   height: calc(100% / 2);
