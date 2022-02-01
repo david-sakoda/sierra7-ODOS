@@ -1,5 +1,7 @@
 import styled from "@emotion/styled";
+
 import { useEffect } from "react";
+import { useQuery } from "react-query";
 import { Dendogram } from "..";
 import { SampleData } from "../shared/Dendogram";
 
@@ -11,11 +13,18 @@ const D3Container = styled.div`
     stroke: #ccc;
     stroke-width: 1.5px;
   }
+  margin-top: 32px;
 `;
 
 export const Visualization = () => {
-  useEffect(() => Dendogram({ height: 800, width: 800, data: SampleData }));
+  const { isLoading, error, data, isFetching } = useQuery("visualization", () =>
+    fetch(
+      "https://15677b7a-534d-4ec6-bd71-83e1d19d8ec7.mock.pstmn.io/odos/movies/visualization"
+    ).then((res) => res.json())
+  );
+  useEffect(() => {
+    if (!isLoading) Dendogram({ height: 800, width: 800, data: data });
+  }, [data, isLoading]);
 
-  return(<D3Container id="d3-container" />)
-  
+  return <D3Container id="d3-container" />;
 };

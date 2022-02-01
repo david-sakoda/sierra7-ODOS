@@ -10,7 +10,12 @@ const keycloak = new Keycloak(config);
 
 export const doLogout = () => {
   keycloak.logout();
+
 };
+
+export const doLogin = () => {
+  keycloak.login();
+}
 export const getToken = () => keycloak.token;
 export const getUsername = () => keycloak.tokenParsed?.preferred_username;
 export const hasRole = (roles) =>

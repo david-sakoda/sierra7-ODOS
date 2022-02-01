@@ -11,6 +11,6 @@ export const PrivateRoute : FunctionComponent<RouteProps> = ({ children }) => {
 
  const isLoggedIn = keycloak.authenticated;
     
- return isLoggedIn ? children : null;
+ return isLoggedIn ? children : <div><span>Please authenticate to view content.</span></div>;
 };
 
