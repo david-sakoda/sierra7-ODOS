@@ -1,5 +1,6 @@
-import { Button, Card, CardActions, CardContent, CardMedia, Typography } from "@mui/material";
+import { Button, Card, CardActions, CardContent, CardMedia, Link, Typography } from "@mui/material";
 import { FunctionComponent } from "react";
+import {Link as RouterLink} from "react-router-dom";
 import Truncate from 'react-truncate';
 
 export type Movie = {
@@ -29,7 +30,7 @@ export const MovieCard : FunctionComponent<Movie> = ({id, name, description, url
             <Truncate  lines={4}>{description}</Truncate>
           </Typography>
         <CardActions sx={{ paddingLeft: 0, justifyItems: "flex-start"}}>
-          <Button size="small">View Dossier</Button>
+          <Button variant="text"><Link component={RouterLink} to={`/dossier/${id}`}>View Dossier</Link></Button>
         </CardActions>
         </CardContent>
       </Card>

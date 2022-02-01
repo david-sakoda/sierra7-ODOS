@@ -3,6 +3,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 
 import { ReactKeycloakProvider } from "@react-keycloak/web";
 import {
+  Dossier,
   Footer,
   Header,
   PrivateRoute,
@@ -36,6 +37,14 @@ function App() {
                   element={
                     <PrivateRoute>
                       <Search />
+                    </PrivateRoute>
+                  }
+                />
+                <Route
+                  path="dossier/:id"
+                  element={
+                    <PrivateRoute>
+                      <Dossier />
                     </PrivateRoute>
                   }
                 />

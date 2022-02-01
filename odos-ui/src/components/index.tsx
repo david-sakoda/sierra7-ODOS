@@ -6,5 +6,6 @@ import {PrivateRoute} from "./shared/PrivateRoute"
 import { Visualization } from "./Visualization";
 import { Search } from "./Search";
 import {MovieCard} from "./shared/MovieCard";
+import { Dossier } from "./Dossier";
 
-export { Header, Footer, Graph, Dendogram, PrivateRoute, Visualization, Search, MovieCard };
+export { Header, Footer, Graph, Dendogram, PrivateRoute, Visualization, Search, MovieCard, Dossier };
