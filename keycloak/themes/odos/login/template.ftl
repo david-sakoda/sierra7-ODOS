@@ -110,7 +110,7 @@
         <div id="odos-header">
             <div class="row">
                 <img alt="USCIS" src="${url.resourcesPath}/img/dhs.png" />
-                <div><span>ODOS Tech Challenge</span></div>
+                <div><span>RetroPaper Movie SPIDER</span></div>
             </div>
         </div>
         <div id="kc-content-wrapper">
