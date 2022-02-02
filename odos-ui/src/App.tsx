@@ -8,7 +8,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
 import {
   Dossier,
-  Footer,
+ 
   Header,
   PrivateRoute,
   Search,
@@ -59,7 +59,6 @@ function App() {
               </Routes>
             </main>
           </Router>
-          <Footer />
         </QueryClientProvider>
       </ReactKeycloakProvider>
     </div>
