@@ -17,7 +17,7 @@ import { useNavigate, Link as RouterLink } from "react-router-dom";
 
 // const pages = [{title: "Search", route: "/"}, {title: "Visualization", route: "/visualize"}];
 const settings = [{ title: "Logout", action: () => doLogout() }];
-const appTitle = "RetroPaper Move Spider";
+const appTitle = "RetroPaper Movie Spider";
 export const Header = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
