@@ -1,61 +1,67 @@
 import {
-  Box,
-  Button,
-  Container,
   AppBar,
-  Toolbar,
+  Avatar,
+  Box,
+  Container,
+  Divider,
+  getListItemSecondaryActionClassesUtilityClass,
   IconButton,
-  Typography,
   Menu,
   MenuItem,
+  MenuList,
+  Toolbar,
   Tooltip,
+  Typography,
 } from "@mui/material";
-import { Menu as MenuIcon, AccountCircle } from "@mui/icons-material";
+import { useState, useContext } from "react";
+import { Link as RouterLink } from "react-router-dom";
+import { UserContext } from "../App";
 import { doLogout } from "../keycloak";
-import { useState } from "react";
-import { useNavigate, Link as RouterLink } from "react-router-dom";
+
 
 // const pages = [{title: "Search", route: "/"}, {title: "Visualization", route: "/visualize"}];
 const settings = [{ title: "Logout", action: () => doLogout() }];
 const appTitle = "RetroPaper Movie Spider";
 export const Header = () => {
-  const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
-  let navigate = useNavigate();
+  const user = useContext(UserContext);
 
-  const handleOpenNavMenu = (event: any) => {
-    setAnchorElNav(event.currentTarget);
-  };
   const handleOpenUserMenu = (event: any) => {
     setAnchorElUser(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
   };
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
 
+  const getInitials= () =>{
+    return user?.name.charAt(0)+user?.family_name.charAt(0) || ""
+  }
+  console.log(user);
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
-        <Toolbar disableGutters sx={{justifyContent: "space-between"}}>
+        <Toolbar disableGutters sx={{ justifyContent: "space-between" }}>
           <Typography
             variant="h6"
             noWrap
             component={RouterLink}
             to="/"
-            sx={{ mr: 2, display: "flex", color: "white", textDecoration: "none" }}
+            sx={{
+              mr: 2,
+              display: "flex",
+              color: "white",
+              textDecoration: "none",
+            }}
           >
             {appTitle}
           </Typography>
 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <AccountCircle />
+              <IconButton onClick={handleOpenUserMenu} >
+                {user && user.name && user.avatar ? <Avatar alt={user?.name} src={process.env.PUBLIC_URL + `/images/${user.avatar}`} sx={{height: 50, width: 50,}}/> :<Avatar alt={user?.name} sx={{height: 50, width: 50,}}>{getInitials()}</Avatar> }
+                <Typography variant="body1" sx={{paddingLeft: 1, color: "white"}}>{user?.name}</Typography>
               </IconButton>
             </Tooltip>
             <Menu
@@ -74,11 +80,15 @@ export const Header = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
+              <MenuList>
+              <p style={{padding: "0px 16px"}}>Role: {user?.resource_access["odos-ui"].roles[0]}</p>
+              <Divider />
               {settings.map((setting) => (
                 <MenuItem key={setting.title} onClick={setting.action}>
                   <Typography textAlign="center">{setting.title}</Typography>
                 </MenuItem>
               ))}
+              </MenuList>
             </Menu>
           </Box>
         </Toolbar>

@@ -16,6 +16,7 @@ export const doLogout = () => {
 export const doLogin = () => {
   keycloak.login();
 }
+export const getTokenParsed = () => keycloak.tokenParsed? keycloak.tokenParsed: null;
 export const getToken = () => keycloak.token;
 export const getUsername = () => keycloak.tokenParsed?.preferred_username;
 export const hasRole = (roles) =>
