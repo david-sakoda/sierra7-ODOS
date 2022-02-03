@@ -1,7 +1,7 @@
 import Keycloak from "keycloak-js";
-
+import { config as conf } from "./config";
 const config = {
-  url: "http://localhost:8080/auth",
+  url: conf.keycloak.URL,
   realm: "odos",
   clientId: "odos-ui",
 };

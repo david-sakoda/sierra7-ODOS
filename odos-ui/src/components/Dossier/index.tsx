@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 import { useQuery } from "react-query";
 import { Link as RouterLink, useParams } from "react-router-dom";
+import { config } from "../../config";
 
 const Container = styled.div`
   margin: 32px auto;
@@ -43,7 +44,7 @@ export const Dossier = () => {
     `dossier-${params.id}`,
     () =>
       fetch(
-        `https://15677b7a-534d-4ec6-bd71-83e1d19d8ec7.mock.pstmn.io/odos/movies/${params.id}`
+        `${config.api.URL}/odos/movies/${params.id}`
       ).then((res) => res.json())
   );
   if (data && !isLoading)

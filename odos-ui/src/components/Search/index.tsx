@@ -4,6 +4,7 @@ import { useQuery } from "react-query";
 import { MovieCard } from "..";
 import { InputAdornment, TextField } from "@mui/material";
 import {Search as SearchIcon} from "@mui/icons-material"
+import { config } from "../../config";
 
 const PageContainer = styled.div`
   display: flex;
@@ -25,7 +26,7 @@ export const Search = () => {
   const [queryRefetch, setQueryFetch] = useState(true);
   const { isLoading, error, data, isFetching } = useQuery("repoData", () =>
     fetch(
-      "https://15677b7a-534d-4ec6-bd71-83e1d19d8ec7.mock.pstmn.io/odos/movies"
+      `${config.api.URL}/odos/movies`
     ).then((res) => res.json())
   );
 

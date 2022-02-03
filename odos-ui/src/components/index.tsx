@@ -6,5 +6,6 @@ import { Graph } from "./shared/Graph";
 import { MovieCard } from "./shared/MovieCard";
 import { PrivateRoute } from "./shared/PrivateRoute";
 import { Visualization } from "./Visualization";
+import { NewGraph } from "./shared/NewGraph";
 
-export { Header, Graph, Dendogram, PrivateRoute, Visualization, Search, MovieCard, Dossier};
+export { Header, Graph, Dendogram, PrivateRoute, Visualization, Search, MovieCard, Dossier, NewGraph };
