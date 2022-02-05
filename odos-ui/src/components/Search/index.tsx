@@ -26,7 +26,7 @@ export const Search = () => {
   const [queryRefetch, setQueryFetch] = useState(true);
   const { isLoading, error, data, isFetching } = useQuery("repoData", () =>
     fetch(
-      `${config.api.URL}/odos/movies`
+      `${config.api.URL}/movies`
     ).then((res) => res.json())
   );
 

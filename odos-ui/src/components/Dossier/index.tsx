@@ -44,7 +44,7 @@ export const Dossier = () => {
     `dossier-${params.id}`,
     () =>
       fetch(
-        `${config.api.URL}/odos/movies/${params.id}`
+        `${config.api.URL}/movies/${params.id}`
       ).then((res) => res.json())
   );
   if (data && !isLoading)
