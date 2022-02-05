@@ -1,8 +1,8 @@
 import express from "express";
+import cors from 'cors';
 import errorHandler from "./src/middlewares/error-handler.middleware";
 import movieRouter from "./src/routes/movies";
 import healthCheckRouter from "./src/routes/healthcheck";
-
 const app = express();
 const PORT = 8000;
 
@@ -1046,6 +1046,9 @@ const flare = {
     },
   ],
 };
+
+app.use(cors());
+
 app.get("/api/v1/movies/visualization", (req, res) => res.send(flare));
 
 app.use("/api/v1/movies", movieRouter);
