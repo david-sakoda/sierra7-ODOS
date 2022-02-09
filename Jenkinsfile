@@ -1,5 +1,6 @@
 #!/bin/bash
 pipeline {
+    agent any 
 	options {
     buildDiscarder(logRotator(numToKeepStr: '30', artifactNumToKeepStr: '3'))
 	}
@@ -12,6 +13,8 @@ pipeline {
 		def emailBodyPost = ""
 		def fortifySh = ""	
     }
+
+
 
     stages {
         stage ('Initialize') {
