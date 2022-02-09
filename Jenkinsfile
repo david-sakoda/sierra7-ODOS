@@ -52,6 +52,7 @@ pipeline {
 						//sh 'cd keycloak'
 						dir('${WORKSPACE}/keycloak'){
 							sh 'docker build -t odos/keycloak:{$BUILD_ID} --no-cache .'
+						}
 					}
 					catch (Exception e) {
 						error "Stage $env.STAGE_NAME Failed"
