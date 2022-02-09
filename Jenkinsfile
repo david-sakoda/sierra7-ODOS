@@ -95,9 +95,14 @@ pipeline {
 		stage('Push Image') {
 	    	steps {
 		        //sh 'docker tag riskmap-keycloak:$env.BUILD_ID'
-				sh 'docker tag odos/keycloak:$BUILD_ID dsakoda/odos/keycloak:latest'
+				sh 'docker tag odos/keycloak:$BUILD_ID asonadmin/odos_keycloak:latest'
 				sh 'docker login -u "dsakoda" -p "Hong1322@" docker.io'
-		      	sh 'docker push asonadmin/odos_keycloak:latest'
+		      	sh 'docker push odos_keycloak:latest'
+				
+				
+				
+				 docker image tag rhel-httpd:latest registry-host:5000/myadmin/rhel-httpd:latest
+ docker image push registry-host:5000/myadmin/rhel-httpd:latest
 
 	      	}
 		}
