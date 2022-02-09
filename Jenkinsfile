@@ -14,8 +14,6 @@ pipeline {
 		def fortifySh = ""	
     }
 
-
-
     stages {
         stage ('Initialize') {
             steps {
@@ -23,12 +21,9 @@ pipeline {
 					try {
 						sh 'echo "PATH = ${PATH}"'
 						sh 'echo "M2_HOME = ${M2_HOME}"'
-						list stageStatus = [:]
-						stageStatus.put(env.STAGE_NAME, success)
 						sh 'echo "ehlo"'
 					}
 					catch (Exception e) {
-						stageStatus.put(env.STAGE_NAME, failed)
 						error "Stage $env.STAGE_NAME Failed"
 					}
 				}
@@ -40,10 +35,8 @@ pipeline {
 				script{
 					try {
 						echo hello
-						stageStatus.put(env.STAGE_NAME, success)
 					}
 					catch (Exception e) {
-						stageStatus.put(env.STAGE_NAME, failed)
 						error "Stage $env.STAGE_NAME Failed"
 					}
 				}
@@ -60,7 +53,6 @@ pipeline {
 						sh 'ls -lrt'
 					}
 					catch (Exception e) {
-						stageStatus.put(env.STAGE_NAME, failed)
 						error "Stage $env.STAGE_NAME Failed"
 					}
 				}
@@ -72,10 +64,9 @@ pipeline {
 				script{
 					try {
 						
-						stageStatus.put(env.STAGE_NAME, success)
+						echo "security scan"
 					}
 					catch (Exception e) {
-						stageStatus.put(env.STAGE_NAME, failed)
 						error "Stage $env.STAGE_NAME Failed"
 					}
 				}
@@ -86,11 +77,10 @@ pipeline {
             steps {
 				script{
 					try {
-					  sh 'echo "hello"'
-						stageStatus.put(env.STAGE_NAME, success)
+					  sh 'echo "deploy"'
 					}
 					catch (Exception e) {
-						stageStatus.put(env.STAGE_NAME, failed)
+
 						error "Stage $env.STAGE_NAME Failed"
 					}
 				}
@@ -103,10 +93,8 @@ pipeline {
 				script{
 					try {
 						sh 'echo "Starting Automation Tests. this is a place holder"'
-						stageStatus.put(env.STAGE_NAME, success)
 					}
 					catch (Exception e) {
-						stageStatus.put(env.STAGE_NAME, failed)
 						error "Stage $env.STAGE_NAME Failed"
 					}
 				}
