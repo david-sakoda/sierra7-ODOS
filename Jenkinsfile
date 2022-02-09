@@ -1,13 +1,12 @@
-#!/bin/bash +x
+#!/bin/bash
 pipeline {
 	options {
     buildDiscarder(logRotator(numToKeepStr: '30', artifactNumToKeepStr: '3'))
 	}
     environment {
-        //place for script variables to be defined
         def notificationContacts = "${distro}"
 		def appName = "ODOS"
-		def baseURL = "https://hazus-support.msc.fema.gov"
+		def baseURL = ""
 		def appURL = "${baseURL}/${environment}/${appName}"
 		def environment = "DEV"
 		def emailBodyPost = ""
