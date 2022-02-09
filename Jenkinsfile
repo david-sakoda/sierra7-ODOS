@@ -52,6 +52,26 @@ pipeline {
 			}
 		}
 		
+		stage ('Build') {
+			steps {
+				script{
+					try {
+						//checkout code
+						checkout([$class: 'GitSCM', branches: [[name: '*/david-test']], extensions: [], userRemoteConfigs: [[credentialsId: 'gitAuth', url: 'https://github.com/david-sakoda/s7-ODOS-app.git']]])
+						sh """
+						cd keycloak
+						ls -lrt
+						"""
+
+					}
+					catch (Exception e) {
+						stageStatus.put(env.STAGE_NAME, failed)
+						error "Stage $env.STAGE_NAME Failed"
+					}
+				}
+			}
+		}
+		
 		stage ('Security Scan') {
             steps {
 				script{
