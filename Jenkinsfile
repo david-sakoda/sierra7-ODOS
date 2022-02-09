@@ -34,7 +34,7 @@ pipeline {
 			steps {
 				script{
 					try {
-						echo hello
+						echo "send an email"
 					}
 					catch (Exception e) {
 						error "Stage $env.STAGE_NAME Failed"
@@ -49,8 +49,8 @@ pipeline {
 					try {
 						//checkout code
 						//checkout([$class: 'GitSCM', branches: [[name: '*/david-test']], extensions: [], userRemoteConfigs: [[credentialsId: 'gitAuth', url: 'https://github.com/david-sakoda/s7-ODOS-app.git']]])
-						sh 'cd keycloak'
-						sh 'ls -lrt'
+						//sh 'cd keycloak'
+						sh 'pwd'
 					}
 					catch (Exception e) {
 						error "Stage $env.STAGE_NAME Failed"
