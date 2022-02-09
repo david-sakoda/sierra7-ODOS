@@ -52,7 +52,7 @@ pipeline {
 						//sh 'cd keycloak'
 						dir('./keycloak'){
 							sh 'whoami'
-							sh 'sudo docker build -t odos/keycloak:$BUILD_ID --no-cache .'
+							sh 'docker build -t odos/keycloak:$BUILD_ID --no-cache .'
 						}
 					}
 					catch (Exception e) {
