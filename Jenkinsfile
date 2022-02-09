@@ -95,7 +95,7 @@ pipeline {
 		stage('Push Image') {
 	    	steps {
 		        //sh 'docker tag riskmap-keycloak:$env.BUILD_ID'
-				sh 'docker tag odos/ycloak:${env.BUILD_ID} dsakoda/odos/keycloak:latest'
+				sh 'docker tag odos/keycloak:$BUILD_ID dsakoda/odos/keycloak:latest'
 				sh 'docker login -u "dsakoda" -p "Hong1322@" docker.io'
 		      	sh 'docker push odos/keycloak:latest'
 	      	}
