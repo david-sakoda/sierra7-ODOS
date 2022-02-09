@@ -38,10 +38,7 @@ pipeline {
 			steps {
 				script{
 					try {
-						/*mail to:"${notificationContacts}",
-						mimeType: "text/html",
-						subject:"STARTED: ${currentBuild.fullDisplayName}",
-						body: "<font color=\"blue\"><strong>STARTED</strong></font>: Build started" */
+						echo hello
 						stageStatus.put(env.STAGE_NAME, success)
 					}
 					catch (Exception e) {
@@ -58,11 +55,8 @@ pipeline {
 					try {
 						//checkout code
 						checkout([$class: 'GitSCM', branches: [[name: '*/david-test']], extensions: [], userRemoteConfigs: [[credentialsId: 'gitAuth', url: 'https://github.com/david-sakoda/s7-ODOS-app.git']]])
-						sh """
-						cd keycloak
-						ls -lrt
-						"""
-
+						sh 'cd keycloak'
+						sh 'ls -lrt'
 					}
 					catch (Exception e) {
 						stageStatus.put(env.STAGE_NAME, failed)
@@ -121,28 +115,31 @@ pipeline {
 	post{
 		always{
 			script{
-				def stageResults = ''
-				stageStatus.each{ key, val ->
-					bat 'echo ' + key + ' : ' + val
-					stageResults += key
-					stageResults += ' : '
-					stageResults += val
-					stageResults += '<br />'
+				//def stageResults = ''
+				//stageStatus.each{ key, val ->
+				//	bat 'echo ' + key + ' : ' + val
+					//stageResults += key
+					//stageResults += ' : '
+					//stageResults += val
+					//stageResults += '<br />' 
+					echo "always"
 				}
-				emailBodyPost = "<p> ${stageResults} <p> Artifacts are located <a href=\"${appURL}\">here</a>. <p> FPR located <a href=\"${env.BUILD_URL}\">here</a> "
+				//emailBodyPost = "<p> ${stageResults} <p> Artifacts are located <a href=\"${appURL}\">here</a>. <p> FPR located <a href=\"${env.BUILD_URL}\">here</a> "
 			}
 		}
 		success {
-            mail to:"${notificationContacts}",
-			mimeType: "text/html",
-			subject:"SUCCESS: ${currentBuild.fullDisplayName}",
- 		    body: "<font color=\"green\"><strong>SUCCESS</strong></font>: SUCCESS <p> ${emailBodyPost}"
+            //mail to:"${notificationContacts}",
+			//mimeType: "text/html",
+			//subject:"SUCCESS: ${currentBuild.fullDisplayName}",
+ 		   // body: "<font color=\"green\"><strong>SUCCESS</strong></font>: SUCCESS <p> ${emailBodyPost}"
+		   echo "success"
 		}
 		failure {
-			mail to:"${notificationContacts}",
-			mimeType: "text/html",
-			subject:"FAILURE: ${currentBuild.fullDisplayName}",
-		    body: "<font color=\"red\"><strong>FAILED</strong></font>: FAILURE <p> ${emailBodyPost}"
+			///mail to:"${notificationContacts}",
+			//mimeType: "text/html",
+			//subject:"FAILURE: ${currentBuild.fullDisplayName}",
+		    //body: "<font color=\"red\"><strong>FAILED</strong></font>: FAILURE <p> ${emailBodyPost}"
+			echo "fail"
 		}
 	}
 }
