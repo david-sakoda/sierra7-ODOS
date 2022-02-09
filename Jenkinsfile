@@ -123,7 +123,7 @@ pipeline {
 					//stageResults += val
 					//stageResults += '<br />' 
 					echo "always"
-				}
+				//}
 				//emailBodyPost = "<p> ${stageResults} <p> Artifacts are located <a href=\"${appURL}\">here</a>. <p> FPR located <a href=\"${env.BUILD_URL}\">here</a> "
 			}
 		}
@@ -142,3 +142,4 @@ pipeline {
 			echo "fail"
 		}
 	}
+}
