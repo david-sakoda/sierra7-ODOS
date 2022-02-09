@@ -25,6 +25,7 @@ pipeline {
 						sh 'echo "M2_HOME = ${M2_HOME}"'
 						list stageStatus = [:]
 						stageStatus.put(env.STAGE_NAME, success)
+						sh 'echo "ehlo"'
 					}
 					catch (Exception e) {
 						stageStatus.put(env.STAGE_NAME, failed)
