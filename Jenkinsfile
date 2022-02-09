@@ -51,7 +51,7 @@ pipeline {
 						//checkout([$class: 'GitSCM', branches: [[name: '*/david-test']], extensions: [], userRemoteConfigs: [[credentialsId: 'gitAuth', url: 'https://github.com/david-sakoda/s7-ODOS-app.git']]])
 						//sh 'cd keycloak'
 						dir('${WORKSPACE}/keycloak'){
-							sh 'docker build -t odos/keycloak:{$BUILD_ID} --no-cache .'
+							sh 'docker build -t odos/keycloak:$BUILD_ID --no-cache .'
 						}
 					}
 					catch (Exception e) {
