@@ -2,7 +2,7 @@
 pipeline {
 	options {
     buildDiscarder(logRotator(numToKeepStr: '30', artifactNumToKeepStr: '3'))
-  }
+	}
     environment {
         //place for script variables to be defined
         def notificationContacts = "${distro}"
