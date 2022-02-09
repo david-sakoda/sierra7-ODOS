@@ -80,7 +80,8 @@ pipeline {
             steps {
 				script{
 					try {
-					  sh 'echo "deploy"'
+					  echo "commented for now"
+					  //sh 'kubectl set image deployment/odos/keycloak odos/keycloak=odos/keycloak:$BUILD_ID'
 					}
 					catch (Exception e) {
 
@@ -90,6 +91,13 @@ pipeline {
             }
 
         }		
+		
+		stage('Push Image') {
+	    	steps {
+		        sh 'docker tag riskmap-keycloak:$env.BUILD_ID'
+		      	sh 'docker push asonadmin/odos_keycloak:$env.BUILD_ID'
+	      	}
+		}
 		
 		stage ('Automation Tests') {
             steps {
