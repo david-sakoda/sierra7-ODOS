@@ -13,8 +13,6 @@ pipeline {
 		def fortifySh = ""	
     }
 
-    agent { any }
-
     stages {
         stage ('Initialize') {
             steps {
