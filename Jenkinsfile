@@ -94,8 +94,8 @@ pipeline {
 		
 		stage('Push Image') {
 	    	steps {
-		        sh 'docker tag riskmap-keycloak:$env.BUILD_ID'
-		      	sh 'docker push asonadmin/odos_keycloak:$env.BUILD_ID'
+		        //sh 'docker tag riskmap-keycloak:$env.BUILD_ID'
+		      	sh 'docker push asonadmin/odos_keycloak:$BUILD_ID'
 	      	}
 		}
 		
