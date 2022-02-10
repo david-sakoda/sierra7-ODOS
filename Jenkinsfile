@@ -125,16 +125,14 @@ pipeline {
 	post{
 		always{
 			script{
-				
-					echo "always"
-				}
+				eho "always"
 			}
 		}
 		success {
             mail to:"${notificationContacts}",
 			mimeType: "text/html",
 			subject:"SUCCESS: ${currentBuild.fullDisplayName}",
- 		   body: "<font color=\"green\"><strong>SUCCESS</strong></font>: SUCCESS <p>"
+ 		   body: "<font color=\"green\"><strong>SUCCESS</strong></font>: SUCCESS <p> "
 		   echo "success"
 		}
 		failure {
