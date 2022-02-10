@@ -53,9 +53,7 @@ pipeline {
 					try {
 						//checkout code
 						//checkout([$class: 'GitSCM', branches: [[name: '*/david-test']], extensions: [], userRemoteConfigs: [[credentialsId: 'gitAuth', url: 'https://github.com/david-sakoda/s7-ODOS-app.git']]])
-						//sh 'cd keycloak'
 						dir('./keycloak'){
-							sh 'whoami'
 							sh 'docker build -t asonadmin/odos_keycloak:$BUILD_ID --no-cache .'
 						}
 					}
@@ -101,16 +99,10 @@ pipeline {
 		
 		stage('Store Image') {
 	    	steps {
-		        //sh 'docker tag riskmap-keycloak:$env.BUILD_ID'
 				sh 'docker tag asonadmin/odos_keycloak:$BUILD_ID asonadmin/odos_keycloak:latest'
-				
 				withCredentials([usernamePassword(credentialsId: 'dockerHubAuth', passwordVariable: 'pass', usernameVariable: 'user')]) {
-					echo "username is $user"
-					//echo "pass is $pass"
 					sh 'docker login -u "' + user + '"' + ' -p "' + pass + '" docker.io'
-
 				}
-				//sh 'docker login -u "dsakoda" -p "Hong1322@" docker.io'
 		      	sh 'docker push asonadmin/odos_keycloak:$BUILD_ID'
 				sh 'docker push asonadmin/odos_keycloak:latest'
 	      	}
