@@ -52,7 +52,7 @@ pipeline {
 						//sh 'cd keycloak'
 						dir('./keycloak'){
 							sh 'whoami'
-							sh 'docker build -t odos/keycloak:$BUILD_ID --no-cache .'
+							sh 'docker build -t asonadmin/odos_keycloak:$BUILD_ID --no-cache .'
 						}
 					}
 					catch (Exception e) {
@@ -95,9 +95,9 @@ pipeline {
 		stage('Push Image') {
 	    	steps {
 		        //sh 'docker tag riskmap-keycloak:$env.BUILD_ID'
-				sh 'docker tag odos/keycloak:$BUILD_ID asonadmin/odos_keycloak:latest'
+				sh 'docker tag asonadmin/odos_keycloak:$BUILD_ID asonadmin/odos_keycloak:latest'
 				sh 'docker login -u "dsakoda" -p "Hong1322@" docker.io'
-		      	sh 'docker push odos_keycloak:latest'
+		      	sh 'docker push asonadmin/odos_keycloak:latest'
 	      	}
 		}
 		
