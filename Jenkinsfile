@@ -86,7 +86,7 @@ pipeline {
 					try {
 					  echo "commented for now"
 					  //sh 'kubectl set image deployment/odos/keycloak odos/keycloak=odos/keycloak:$BUILD_ID'
-					   sh 'kubectl get all'
+					   //sh 'kubectl get all'
 					   //sh 'ssh jenkins@172.20.255.1 kubectl set image deployment/ciam-keycloak ciam-keycloak=ablslqbe01.msc.fema.gov:8443/ciam/ciam-keycloak:${env.BUILD_ID} --record --namespace=ciam"
 					   //sh 'ssh jenkins@10.0.63.79 kubectl apply -f /path/node-deployment.yaml --kubeconfig=/path/kube.yaml'
 					}
@@ -103,7 +103,11 @@ pipeline {
 	    	steps {
 		        //sh 'docker tag riskmap-keycloak:$env.BUILD_ID'
 				sh 'docker tag asonadmin/odos_keycloak:$BUILD_ID asonadmin/odos_keycloak:latest'
-				sh 'docker login -u "dsakoda" -p "Hong1322@" docker.io'
+				
+				withCredentials([usernamePassword(credentialsId: 'dockerHubAuth', passwordVariable: 'pass', usernameVariable: 'user')]) {
+					sh 'docker login -u "$user" -p "$pass" docker.io'
+				}
+				//sh 'docker login -u "dsakoda" -p "Hong1322@" docker.io'
 		      	sh 'docker push asonadmin/odos_keycloak:$BUILD_ID'
 				sh 'docker push asonadmin/odos_keycloak:latest'
 	      	}
