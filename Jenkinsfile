@@ -138,17 +138,17 @@ pipeline {
 			}
 		}
 		success {
-            //mail to:"${notificationContacts}",
-			//mimeType: "text/html",
-			//subject:"SUCCESS: ${currentBuild.fullDisplayName}",
- 		   // body: "<font color=\"green\"><strong>SUCCESS</strong></font>: SUCCESS <p> ${emailBodyPost}"
+            mail to:"${notificationContacts}",
+			mimeType: "text/html",
+			subject:"SUCCESS: ${currentBuild.fullDisplayName}",
+ 		   body: "<font color=\"green\"><strong>SUCCESS</strong></font>: SUCCESS <p> ${emailBodyPost}"
 		   echo "success"
 		}
 		failure {
-			///mail to:"${notificationContacts}",
-			//mimeType: "text/html",
-			//subject:"FAILURE: ${currentBuild.fullDisplayName}",
-		    //body: "<font color=\"red\"><strong>FAILED</strong></font>: FAILURE <p> ${emailBodyPost}"
+			mail to:"${notificationContacts}",
+			mimeType: "text/html",
+			subject:"FAILURE: ${currentBuild.fullDisplayName}",
+		    body: "<font color=\"red\"><strong>FAILED</strong></font>: FAILURE <p> ${emailBodyPost}"
 			echo "fail"
 		}
 	}
