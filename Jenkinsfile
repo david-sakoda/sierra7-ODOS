@@ -125,30 +125,23 @@ pipeline {
 	post{
 		always{
 			script{
-				def stageResults = ''
-				stageStatus.each{ key, val ->
-					sh 'echo ' + key + ' : ' + val
-					stageResults += key
-					stageResults += ' : '
-					stageResults += val
-					stageResults += '<br />' 
+				
 					echo "always"
 				}
-				emailBodyPost = "<p> ${stageResults} <p> Artifacts are located <a href=\"${appURL}\">here</a>. <p> FPR located <a href=\"${env.BUILD_URL}\">here</a> "
 			}
 		}
 		success {
             mail to:"${notificationContacts}",
 			mimeType: "text/html",
 			subject:"SUCCESS: ${currentBuild.fullDisplayName}",
- 		   body: "<font color=\"green\"><strong>SUCCESS</strong></font>: SUCCESS <p> ${emailBodyPost}"
+ 		   body: "<font color=\"green\"><strong>SUCCESS</strong></font>: SUCCESS <p>"
 		   echo "success"
 		}
 		failure {
 			mail to:"${notificationContacts}",
 			mimeType: "text/html",
 			subject:"FAILURE: ${currentBuild.fullDisplayName}",
-		    body: "<font color=\"red\"><strong>FAILED</strong></font>: FAILURE <p> ${emailBodyPost}"
+		    body: "<font color=\"red\"><strong>FAILED</strong></font>: FAILURE <p> try again"
 			echo "fail"
 		}
 	}
