@@ -35,6 +35,10 @@ pipeline {
 				script{
 					try {
 						echo "send an email"
+						mail to:"${notificationContacts}",
+						mimeType: "text/html",
+						subject:"STARTED: ${currentBuild.fullDisplayName}",
+						body: "<font color=\"blue\"><strong>STARTED</strong></font>: Build started" 
 					}
 					catch (Exception e) {
 						error "Stage $env.STAGE_NAME Failed"
