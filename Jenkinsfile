@@ -125,16 +125,16 @@ pipeline {
 	post{
 		always{
 			script{
-				//def stageResults = ''
-				//stageStatus.each{ key, val ->
-				//	bat 'echo ' + key + ' : ' + val
-					//stageResults += key
-					//stageResults += ' : '
-					//stageResults += val
-					//stageResults += '<br />' 
+				def stageResults = ''
+				stageStatus.each{ key, val ->
+					sh 'echo ' + key + ' : ' + val
+					stageResults += key
+					stageResults += ' : '
+					stageResults += val
+					stageResults += '<br />' 
 					echo "always"
-				//}
-				//emailBodyPost = "<p> ${stageResults} <p> Artifacts are located <a href=\"${appURL}\">here</a>. <p> FPR located <a href=\"${env.BUILD_URL}\">here</a> "
+				}
+				emailBodyPost = "<p> ${stageResults} <p> Artifacts are located <a href=\"${appURL}\">here</a>. <p> FPR located <a href=\"${env.BUILD_URL}\">here</a> "
 			}
 		}
 		success {
