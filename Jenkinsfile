@@ -105,6 +105,8 @@ pipeline {
 				sh 'docker tag asonadmin/odos_keycloak:$BUILD_ID asonadmin/odos_keycloak:latest'
 				
 				withCredentials([usernamePassword(credentialsId: 'dockerHubAuth', passwordVariable: 'pass', usernameVariable: 'user')]) {
+					sh 'echo user'
+					sh 'echo pass'
 					sh('docker login -u "$user" -p "$pass" docker.io')
 				}
 				//sh 'docker login -u "dsakoda" -p "Hong1322@" docker.io'
