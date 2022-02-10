@@ -92,12 +92,13 @@ pipeline {
 
         }		
 		
-		stage('Push Image') {
+		stage('Store Image') {
 	    	steps {
 		        //sh 'docker tag riskmap-keycloak:$env.BUILD_ID'
 				sh 'docker tag asonadmin/odos_keycloak:$BUILD_ID asonadmin/odos_keycloak:latest'
 				sh 'docker login -u "dsakoda" -p "Hong1322@" docker.io'
-		      	sh 'docker push asonadmin/odos_keycloak:latest'
+		      	sh 'docker push asonadmin/odos_keycloak:$BUILD_ID'
+				sh 'docker push asonadmin/odos_keycloak:latest'
 	      	}
 		}
 		
