@@ -107,7 +107,7 @@ pipeline {
 				withCredentials([usernamePassword(credentialsId: 'dockerHubAuth', passwordVariable: 'pass', usernameVariable: 'user')]) {
 					echo "username is $user"
 					//echo "pass is $pass"
-					sh('docker login -u $user -p $pass docker.io')
+					sh('docker login -u "$user" -p "$pass" docker.io')
 				}
 				//sh 'docker login -u "dsakoda" -p "Hong1322@" docker.io'
 		      	sh 'docker push asonadmin/odos_keycloak:$BUILD_ID'
