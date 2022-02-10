@@ -84,9 +84,10 @@ pipeline {
 					try {
 					  echo "commented for now"
 					  //sh 'kubectl set image deployment/odos/keycloak odos/keycloak=odos/keycloak:$BUILD_ID'
+					  //sh 'ssh jenkins@172.20.255.1 kubectl apply -f /path/keycloak-deployment.yml --kubeconfig=keycloak-deployment.yml'
 					   //sh 'kubectl get all'
-					   //sh 'ssh jenkins@172.20.255.1 kubectl set image deployment/ciam-keycloak ciam-keycloak=ablslqbe01.msc.fema.gov:8443/ciam/ciam-keycloak:${env.BUILD_ID} --record --namespace=ciam"
-					   //sh 'ssh jenkins@10.0.63.79 kubectl apply -f /path/node-deployment.yaml --kubeconfig=/path/kube.yaml'
+					   //sh 'ssh jenkins@172.20.255.1 kubectl set image deployment/odos_keycloak  --namespace=odos"
+					   
 					}
 					catch (Exception e) {
 
