@@ -125,7 +125,7 @@ pipeline {
 	post{
 		always{
 			script{
-				eho "always"
+				echo "always"
 			}
 		}
 		success {
