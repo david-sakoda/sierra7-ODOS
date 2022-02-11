@@ -16,13 +16,13 @@ import {
 import { useState, useContext } from "react";
 import { Link as RouterLink } from "react-router-dom";
 import { UserContext } from "../App";
-import { doLogout } from "../keycloak";
+import { useKeycloak } from "@react-keycloak/web";
 
-
-// const pages = [{title: "Search", route: "/"}, {title: "Visualization", route: "/visualize"}];
-const settings = [{ title: "Logout", action: () => doLogout() }];
-const appTitle = "RetroPaper Movie Spider";
 export const Header = () => {
+  const { keycloak, initialized } = useKeycloak(); 
+  // const pages = [{title: "Search", route: "/"}, {title: "Visualization", route: "/visualize"}];
+  const settings = [{ title: "Logout", action: () => keycloak.logout() }];
+  const appTitle = "RetroPaper Movie Spider";
   const [anchorElUser, setAnchorElUser] = useState(null);
   const user = useContext(UserContext);
 
@@ -37,7 +37,8 @@ export const Header = () => {
   const getInitials= () =>{
     return user?.name.charAt(0)+user?.family_name.charAt(0) || ""
   }
-  console.log(user);
+
+
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -60,7 +61,7 @@ export const Header = () => {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} >
-                {user && user.name && user.avatar ? <Avatar alt={user?.name} src={process.env.PUBLIC_URL + `/images/${user.avatar}`} sx={{height: 50, width: 50,}}/> :<Avatar alt={user?.name} sx={{height: 50, width: 50,}}>{getInitials()}</Avatar> }
+                {user && user.name && user.avatar ? <Avatar alt={user?.name} src={ `/images/${user.avatar}`} sx={{height: 50, width: 50,}}/> :<Avatar alt={user?.name} sx={{height: 50, width: 50,}}>{getInitials()}</Avatar> }
                 <Typography variant="body1" sx={{paddingLeft: 1, color: "white"}}>{user?.name}</Typography>
               </IconButton>
             </Tooltip>

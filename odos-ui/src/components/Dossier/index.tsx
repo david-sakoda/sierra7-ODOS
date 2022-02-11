@@ -10,6 +10,7 @@ import {
 import { useQuery } from "react-query";
 import { Link as RouterLink, useParams } from "react-router-dom";
 import { config } from "../../config";
+import { useFetchMovieDossier } from "../../hooks";
 
 const Container = styled.div`
   margin: 32px auto;
@@ -40,12 +41,9 @@ const categoriesArray = ["Drama", "Romance", "Thriller"];
 export const Dossier = () => {
   // const [queryRefetch, setQueryFetch] = useState(true);
   const params = useParams();
-  const { isLoading, error, data, isFetching } = useQuery(
-    `dossier-${params.id}`,
-    () =>
-      fetch(
-        `${config.api.URL}/movies/${params.id}`
-      ).then((res) => res.json())
+  
+  const { isLoading, error, data, isFetching } = useFetchMovieDossier(
+    params.id
   );
   if (data && !isLoading)
     return (
@@ -54,7 +52,7 @@ export const Dossier = () => {
         <TextContainer>
           <h2>{data.name}</h2>
           <Button variant="text">
-            <Link component={RouterLink} to="/visualization">
+            <Link component={RouterLink} to="/visualize">
               VIEW REPORT
             </Link>
           </Button>
@@ -62,25 +60,38 @@ export const Dossier = () => {
             <TableBody>
               <TableRow>
                 <TableCell variant="head">Director:</TableCell>
-                <TableCell><Link component={RouterLink} to="/visualization" >Jim Jarmusch</Link></TableCell>
+                <TableCell>
+                  <Link component={RouterLink} to="/visualize">
+                    Jim Jarmusch
+                  </Link>
+                </TableCell>
               </TableRow>
               <TableRow>
                 <TableCell variant="head">Starring:</TableCell>
                 <TableCell>
                   {actorsArray.map((a) => (
                     <>
-                      <Link component={RouterLink} to="/visualization" >{a.name}</Link> as <Link component={RouterLink} to="/visualization" >{a.character}</Link>
+                      <Link component={RouterLink} to="/visualize">
+                        {a.name}
+                      </Link>{" "}
+                      as{" "}
+                      <Link component={RouterLink} to="/visualize">
+                        {a.character}
+                      </Link>
                       <br />
                     </>
                   ))}
                 </TableCell>
               </TableRow>
-              <TableRow><TableCell variant="head">Year:</TableCell><TableCell>1999</TableCell></TableRow>
               <TableRow>
-                <TableCell variant="head">{categoriesArray.length > 1? "Categories" : "Category"}:</TableCell>
-                <TableCell>
-                  {categoriesArray.join(", ")}
+                <TableCell variant="head">Year:</TableCell>
+                <TableCell>1999</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell variant="head">
+                  {categoriesArray.length > 1 ? "Categories" : "Category"}:
                 </TableCell>
+                <TableCell>{categoriesArray.join(", ")}</TableCell>
               </TableRow>
             </TableBody>
           </Table>
@@ -94,8 +105,11 @@ export const Dossier = () => {
             congue mauris rhoncus aenean vel. Mi sit amet mauris commodo quis
             imperdiet massa. Malesuada pellentesque elit eget gravida cum sociis
             natoque. Odio pellentesque diam volutpat commodo sed egestas egestas
-            fringilla.</p><p>Sapien et ligula ullamcorper malesuada proin libero nunc.
-            Platea dictumst vestibulum rhoncus est pellentesque elit ullamcorper
+            fringilla.
+          </p>
+          <p>
+            Sapien et ligula ullamcorper malesuada proin libero nunc. Platea
+            dictumst vestibulum rhoncus est pellentesque elit ullamcorper
             dignissim cras. At urna condimentum mattis pellentesque id nibh
             tortor id. Quis auctor elit sed vulputate mi sit amet. Viverra
             maecenas accumsan lacus vel facilisis. Ridiculus mus mauris vitae

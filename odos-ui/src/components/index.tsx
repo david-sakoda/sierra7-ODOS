@@ -1,11 +1,9 @@
-import { Dossier } from "./Dossier";
-import { Header } from "./Header";
-import { Search } from "./Search";
-import { Dendogram } from "./shared/Dendogram";
-import { Graph } from "./shared/Graph";
-import { MovieCard } from "./shared/MovieCard";
-import { PrivateRoute } from "./shared/PrivateRoute";
-import { Visualization } from "./Visualization";
-import { NewGraph } from "./shared/NewGraph";
-
-export { Header, Graph, Dendogram, PrivateRoute, Visualization, Search, MovieCard, Dossier, NewGraph };
+export { Dossier } from "./Dossier";
+export { Header } from "./Header";
+export { Search } from "./Search";
+// import { Dendogram } from "./shared/Dendogram";
+// import { Graph } from "./shared/Graph";
+export { MovieCard } from "./shared/MovieCard";
+export { PrivateRoute } from "./shared/PrivateRoute";
+export { Visualization } from "./Visualization";
+// import { NewGraph } from "./shared/NewGraph";

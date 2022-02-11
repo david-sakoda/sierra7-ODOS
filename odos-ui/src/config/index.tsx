@@ -1,6 +1,6 @@
 const local = {
     api: {
-      URL: "http://localhost:8000/api/v1" //URL Rewrite will take care of this
+      URL: "/api/v1" //URL Rewrite will take care of this
     },
     keycloak:{
         URL: "http://localhost:8080/auth"

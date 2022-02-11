@@ -1,10 +1,8 @@
 import styled from "@emotion/styled";
-import { useState } from "react";
-import { useQuery } from "react-query";
-import { MovieCard } from "..";
+import { Search as SearchIcon } from "@mui/icons-material";
 import { InputAdornment, TextField } from "@mui/material";
-import {Search as SearchIcon} from "@mui/icons-material"
-import { config } from "../../config";
+import { MovieCard } from "..";
+import { useFetchMovies } from "../../hooks";
 
 const PageContainer = styled.div`
   display: flex;
@@ -23,12 +21,8 @@ const Container = styled.div`
 `;
 
 export const Search = () => {
-  const [queryRefetch, setQueryFetch] = useState(true);
-  const { isLoading, error, data, isFetching } = useQuery("repoData", () =>
-    fetch(
-      `${config.api.URL}/movies`
-    ).then((res) => res.json())
-  );
+
+  const { isLoading, error, data } = useFetchMovies();
 
   if (data && !isLoading)
     return (
