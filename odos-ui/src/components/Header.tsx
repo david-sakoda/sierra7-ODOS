@@ -3,28 +3,26 @@ import {
   Avatar,
   Box,
   Container,
-  Divider,
-  getListItemSecondaryActionClassesUtilityClass,
-  IconButton,
+  Divider, IconButton,
   Menu,
   MenuItem,
   MenuList,
   Toolbar,
   Tooltip,
-  Typography,
+  Typography
 } from "@mui/material";
-import { useState, useContext } from "react";
-import { Link as RouterLink } from "react-router-dom";
-import { UserContext } from "../App";
 import { useKeycloak } from "@react-keycloak/web";
+import { useState } from "react";
+import { Link as RouterLink } from "react-router-dom";
+
 
 export const Header = () => {
-  const { keycloak, initialized } = useKeycloak(); 
+  const { keycloak } = useKeycloak(); 
   // const pages = [{title: "Search", route: "/"}, {title: "Visualization", route: "/visualize"}];
   const settings = [{ title: "Logout", action: () => keycloak.logout() }];
   const appTitle = "RetroPaper Movie Spider";
   const [anchorElUser, setAnchorElUser] = useState(null);
-  const user = useContext(UserContext);
+  const user = keycloak.idTokenParsed || {};
 
   const handleOpenUserMenu = (event: any) => {
     setAnchorElUser(event.currentTarget);
@@ -35,9 +33,10 @@ export const Header = () => {
   };
 
   const getInitials= () =>{
-    return user?.name.charAt(0)+user?.family_name.charAt(0) || ""
+    if(user.name && user.family_name)
+    return user.name.charAt(0)+user.family_name.charAt(0) || ""
+    else return "";
   }
-
 
   return (
     <AppBar position="static">
@@ -82,7 +81,7 @@ export const Header = () => {
               onClose={handleCloseUserMenu}
             >
               <MenuList>
-              <p style={{padding: "0px 16px"}}>Role: {user?.resource_access["odos-ui"].roles[0]}</p>
+              {user.resource_access && <p style={{padding: "0px 16px"}}>Role: {user.resource_access["odos-ui"].roles[0]}</p>}
               <Divider />
               {settings.map((setting) => (
                 <MenuItem key={setting.title} onClick={setting.action}>
@@ -95,5 +94,6 @@ export const Header = () => {
         </Toolbar>
       </Container>
     </AppBar>
-  );
+  ) 
+
 };

@@ -11,7 +11,7 @@ describe("MovieListing",()=>{
         it.todo("Renders")
     })
 
-    xdescribe("Search",()=>{
+    describe("Search",()=>{
         it.todo("Searches");
     })
 })

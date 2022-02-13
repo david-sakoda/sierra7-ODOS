@@ -5,12 +5,10 @@ import {
   Table,
   TableBody,
   TableCell,
-  TableRow,
+  TableRow
 } from "@mui/material";
-import { useQuery } from "react-query";
 import { Link as RouterLink, useParams } from "react-router-dom";
-import { config } from "../../config";
-import { useFetchMovieDossier } from "../../hooks";
+import { useFetchMovieDossier } from "@/hooks";
 
 const Container = styled.div`
   margin: 32px auto;
@@ -42,7 +40,7 @@ export const Dossier = () => {
   // const [queryRefetch, setQueryFetch] = useState(true);
   const params = useParams();
   
-  const { isLoading, error, data, isFetching } = useFetchMovieDossier(
+  const { isLoading, data  } = useFetchMovieDossier(
     params.id
   );
   if (data && !isLoading)

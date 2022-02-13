@@ -1,8 +1,8 @@
 import styled from "@emotion/styled";
 import { Search as SearchIcon } from "@mui/icons-material";
 import { InputAdornment, TextField } from "@mui/material";
-import { MovieCard } from "..";
-import { useFetchMovies } from "../../hooks";
+import { MovieCard } from "@/components";
+import { useFetchMovies } from "@/hooks";
 
 const PageContainer = styled.div`
   display: flex;
