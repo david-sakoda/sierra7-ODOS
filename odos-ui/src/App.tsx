@@ -49,7 +49,7 @@ function App() {
                     path="visualize"
                     element={
                       <PrivateRoute>
-                        <Visualization />
+                        <Visualization width='400' height='300' />
                       </PrivateRoute>
                     }
                   />
