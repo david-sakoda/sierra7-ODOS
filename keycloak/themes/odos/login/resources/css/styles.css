@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-body {
+ body {
   background-color: #f0f0f0;
   background-size: cover;
   background-repeat: no-repeat;
@@ -107,6 +107,19 @@ input[type="password"] {
   padding: 4px 8px;
   height: 32px;
   width: calc(100% - 20px);
+  box-shadow: none;
+  transition: all 0.3s ease-in-out, padding 1ms;
+}
+
+select {
+  font-size: 14px;
+  /* margin-bottom: 20px; */
+  background-color: #ffffff;
+  border: 1px solid #c0c2c4;
+  border-radius: 2px;
+  padding: 4px 8px;
+  height: 42px;
+  width: 100%;
   box-shadow: none;
   transition: all 0.3s ease-in-out, padding 1ms;
 }
@@ -234,9 +247,6 @@ fieldset {
   white-space: nowrap; /* added line */
 }
 
-#kc-register-form input[type="text"] {
-  width: calc(100%);
-}
 
 header {
   text-align: center;
@@ -244,10 +254,10 @@ header {
 
 .alert {
   border-radius: 3px;
-  padding: 0 4px;
   border-left-style: solid;
   border-left-width: 5px;
   padding: 10px;
+  margin-top: 16px;
 }
 .alert-success {
   background-color: #e4f1e1;
