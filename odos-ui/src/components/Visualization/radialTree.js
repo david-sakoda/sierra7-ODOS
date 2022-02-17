@@ -1,16 +1,20 @@
 import { hierarchy, tree, select, transition, easeLinear, linkRadial } from 'd3';
-import { data1, data2 } from './data';
+// import { data1, data2 } from './data';
 import d3Wrap from 'react-d3-wrap';
 
 export const RadialTree = d3Wrap({
   initialize(svg, data, options) {},
 
   update(svg, data, options) {
+    const { invokeRoute, getData, animate } = options;
     // const { height, margin } = dimensions;
-    const { invokeRoute, getData } = options;
+    // remove the old version
+    if (animate) {
+      select(svg).select('g').remove();
+    }
     const width = 932;
     const radius = 517.7777777777777;
-    let loadtest = true;
+    // let loadtest = true;
     const treeData = (data) =>
       tree()
         .size([2 * Math.PI, radius])
@@ -43,10 +47,10 @@ export const RadialTree = d3Wrap({
         });
 
     // (re)render the tree
-    function newdata(animate = true, thedata = data1) {
+    function newdata(animate = true, thedata = data) {
       let root = treeData(thedata);
       let links_data = root.links();
-      // console.log({ thedata, root, links_data });
+      console.log({ thedata, root, links_data });
 
       // update
       let links = linkgroup.selectAll('path').data(links_data, (d) => d.source.data.name + '_' + d.target.data.name);
@@ -109,20 +113,26 @@ export const RadialTree = d3Wrap({
             d.children || (children && (children.length > 0 || altChildren.length > 0)) ? true : false;
           d.data.children = altChildren;
           d.data.altChildren = children;
-          if (loadtest) {
-            if (hasChildren) {
-              newdata();
-            } else {
-              newdata(true, data2);
-              loadtest = false;
-            }
+          // if (loadtest) {
+          //   if (hasChildren) {
+          //     newdata();
+          //   } else {
+          //     newdata(true, data2);
+          //     loadtest = false;
+          //   }
+          // } else {
+          //   if (hasChildren) {
+          //     newdata(true, data2);
+          //   } else {
+          //     newdata();
+          //     loadtest = true;
+          //   }
+          // }
+          if (hasChildren) {
+            newdata();
           } else {
-            if (hasChildren) {
-              newdata(true, data2);
-            } else {
-              newdata();
-              loadtest = true;
-            }
+            select(svg).select('g').remove();
+            getData();
           }
           // const newData = await getData();
           // console.log({ newData });
@@ -212,10 +222,8 @@ export const RadialTree = d3Wrap({
         .attr('transform', (d) => (d.x >= Math.PI ? 'rotate(180)' : null));
     }
 
-    newdata(false);
+    newdata(animate);
   },
 
-  destroy() {
-    // Optional clean up when a component is being unmounted...
-  },
+  destroy() {},
 });
