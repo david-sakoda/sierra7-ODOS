@@ -1,3 +1,4 @@
+import styled from "@emotion/styled";
 import { Button, Card, CardActions, CardContent, CardMedia, Link, Typography } from "@mui/material";
 import { FunctionComponent } from "react";
 import {Link as RouterLink} from "react-router-dom";
@@ -10,30 +11,37 @@ export type Movie = {
     url: string
 }
 
+const StyledCard = styled(Card)`
+  display: flex;
+  height: 250px;
+  width: 423px;
+`
+
 export const MovieCard : FunctionComponent<Movie> = ({id, name, description, url}) => {
     
   return (
     
-      <Card key={id} sx={{ maxWidth: 345, display: "grid", gridTemplateColumns: "1fr 1fr", width: "345px", height: "250px" }}>
+      <StyledCard key={id}>
         <CardMedia
           component="img"
           image={url}
           alt={`${name} poster`}
           height="250px"
-          
+          sx={{width: 151}}
         />
         <CardContent sx={{display: "flex", flexDirection: "column", justifyContent: "space-between", paddingBottom: 0, height: "calc(250px - 32px"}}>
           <Typography gutterBottom variant="subtitle1" component="div" align="left">
             {name}
           </Typography>
           <Typography variant="body2" color="text.secondary"  align="left">
-            <Truncate  lines={4}>{description}</Truncate>
+            <Truncate width={900}>{description}</Truncate>
           </Typography>
         <CardActions sx={{ paddingLeft: 0, justifyItems: "flex-start"}}>
           <Button variant="text"><Link component={RouterLink} to={`/dossier/${id}`}>View Dossier</Link></Button>
+          <Button variant="text"><Link component={RouterLink} to={`/visualize`}>View Report</Link></Button>
         </CardActions>
         </CardContent>
-      </Card>
+      </StyledCard>
     
   );
 };
