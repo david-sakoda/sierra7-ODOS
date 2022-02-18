@@ -15,6 +15,7 @@ const StyledCard = styled(Card)`
   display: flex;
   height: 250px;
   width: 423px;
+  margin: 0 auto 0 0;
   border-radius: 1rem;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
   transform: perspective(3000px) rotateY(5deg);
