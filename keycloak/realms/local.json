@@ -727,19 +727,19 @@
       "nodeReRegistrationTimeout": -1,
       "protocolMappers": [
         {
-          "id": "b6912e47-d38a-402b-be33-b429c3d6d0cd",
-          "name": "resource_access",
+          "id": "bd01551d-5e63-4407-8b2c-bb27b218625c",
+          "name": "client roles",
           "protocol": "openid-connect",
           "protocolMapper": "oidc-usermodel-client-role-mapper",
           "consentRequired": false,
           "config": {
             "multivalued": "true",
             "userinfo.token.claim": "true",
+            "user.attribute": "foo",
             "id.token.claim": "true",
             "access.token.claim": "true",
-            "claim.name": "resource_access",
-            "jsonType.label": "String",
-            "usermodel.clientRoleMapping.clientId": "odos-ui"
+            "claim.name": "resource_access.${client_id}.roles",
+            "jsonType.label": "String"
           }
         },
         {
