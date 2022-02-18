@@ -67,8 +67,8 @@ export const Search = () => {
         </Container>
         {roleArray.includes("SUPERVISOR") && (
           <div className="AddButton">
-            <Fab color="primary" aria-label="add">
-              <AddIcon />
+            <Fab color="primary" aria-label="add" variant="extended">
+              <AddIcon /> Add Movie
             </Fab>
           </div>
         )}
