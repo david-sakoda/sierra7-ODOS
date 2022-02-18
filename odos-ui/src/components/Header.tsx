@@ -37,7 +37,7 @@ export const Header = () => {
     return user.name.charAt(0)+user.family_name.charAt(0) || ""
     else return "";
   }
-
+  console.log(user)
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -81,7 +81,7 @@ export const Header = () => {
               onClose={handleCloseUserMenu}
             >
               <MenuList>
-              {user.resource_access && <p style={{padding: "0px 16px"}}>Role: {user.resource_access["odos-ui"].roles[0]}</p>}
+              {user.resource_access && <p style={{padding: "0px 16px"}}>Role: {user.resource_access[0]}</p>}
               <Divider />
               {settings.map((setting) => (
                 <MenuItem key={setting.title} onClick={setting.action}>

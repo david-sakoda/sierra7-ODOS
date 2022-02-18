@@ -729,6 +729,22 @@
         "nodeReRegistrationTimeout": -1,
         "protocolMappers": [
           {
+            "id": "b6912e47-d38a-402b-be33-b429c3d6d0cd",
+            "name": "resource_access",
+            "protocol": "openid-connect",
+            "protocolMapper": "oidc-usermodel-client-role-mapper",
+            "consentRequired": false,
+            "config": {
+              "multivalued": "true",
+              "userinfo.token.claim": "true",
+              "id.token.claim": "true",
+              "access.token.claim": "true",
+              "claim.name": "resource_access",
+              "jsonType.label": "String",
+              "usermodel.clientRoleMapping.clientId": "odos-ui"
+            }
+          },
+          {
             "id": "2c3b4e85-33a6-4b09-95ac-96d333b02512",
             "name": "avatar",
             "protocol": "openid-connect",
