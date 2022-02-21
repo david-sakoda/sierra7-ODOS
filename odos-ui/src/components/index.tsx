@@ -7,3 +7,9 @@ export { MovieCard } from "./shared/MovieCard";
 export { PrivateRoute } from "./shared/PrivateRoute";
 export { Visualization } from "./Visualization";
 // import { NewGraph } from "./shared/NewGraph";
+export {UpsertMovie} from "./UpsertMovie";
+export {ModalDialog} from "./shared/ModalDialog";
+export {Fab} from "./shared/Fab";
+export {PlaceHolderImage} from "./shared/PlaceholderImage";
+export {CoverImage} from "./shared/CoverImage";
+export {ChipAutocomplete} from "./shared/ChipAutocomplete"
