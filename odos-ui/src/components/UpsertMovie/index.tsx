@@ -184,7 +184,7 @@ export const UpsertMovie = ({ type }: Props) => {
         </TextContainer>
         
         <ModalDialog
-          title={`Save - ${data.name}`}
+          title={`Save - ${formData.name}`}
           content={"Save was successful"}
           isOpen={openSave}
           setIsOpen={setOpenSave}
