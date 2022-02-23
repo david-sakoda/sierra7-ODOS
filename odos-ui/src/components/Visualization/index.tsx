@@ -1,51 +1,42 @@
 // import { useState } from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { RadialTree } from './RadialTree';
+import { RadialTree } from './radialTree';
 import { data1, data2 } from './data';
-
 
 export const Visualization = () => {
   
-  const [data, setData] = useState(data1);
-  const [animate, setAnimate] = useState(false);
-  const [flag, setFlag] = useState(true);
-  // const [gettingData, setGettingData] = useState(false);
-  
+  const [data, setData] = useState({});
+  const [gettingData, setGettingData] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   const timeoutID = setTimeout(() => {
-  //     setAnimate(true);
-  //     if (gettingData) {
-  //       setData(data1);
-  //       // setFlag(false)
-  //     } else {
-  //       setData(data2);
-  //       // setFlag(true)
-  //     }
-  //   }, 2000);
-  //   return () => {
-  //     clearTimeout(timeoutID);
-  //   };
-  // }, [gettingData]);
+  useEffect(() => {
+    // this should be replaced with an ajax call
+    const timeoutID = setTimeout(() => {
+      if (gettingData) {
+        setData(JSON.parse(JSON.stringify(data1)));
+      } else {
+        setData(JSON.parse(JSON.stringify(data2)));
+      }
+      setIsLoading(false);
+    }, 1000);
+    return () => {
+      clearTimeout(timeoutID);
+    };
+  }, [gettingData]);
   
   const invokeRoute = () => {
     navigate('/dossier/1');
   } 
   const getData = () => {
-    setAnimate(true);
-    if (flag) {
-      setData(data2);
-      setFlag(false)
-    } else {
-      setData(data1);
-      setFlag(true)
-    }
+    setIsLoading(true);
+    setGettingData(!gettingData);
   }
 
   return (
-    <RadialTree data={ data } options={{ invokeRoute, getData, animate }} />
+    <RadialTree data={data} width={1200} height={1200} options={{ invokeRoute, getData, isLoading }} />
   ) 
 
 };
