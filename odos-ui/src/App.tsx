@@ -11,9 +11,11 @@ import {
   Header,
   PrivateRoute,
   Search,
+  UpsertMovie,
   Visualization
 } from "@/components";
 import keycloak from "@/keycloak";
+import { AnimatePresence } from "framer-motion";
 
 function App() {
   const queryClient = new QueryClient();
@@ -28,6 +30,7 @@ function App() {
             <Router>
               <Header />
               <main>
+                  
                 <Routes>
                   <Route
                     path="/"
@@ -37,6 +40,22 @@ function App() {
                       </PrivateRoute>
                     }
                   />
+                    <Route
+                      path="dossier/:id/edit"
+                      element={
+                        <PrivateRoute>
+                          <UpsertMovie type="edit" />
+                        </PrivateRoute>
+                      }
+                    />
+                    <Route
+                      path="add"
+                      element={
+                        <PrivateRoute>
+                          <UpsertMovie type="add" />
+                        </PrivateRoute>
+                      }
+                    />
                   <Route
                     path="dossier/:id"
                     element={

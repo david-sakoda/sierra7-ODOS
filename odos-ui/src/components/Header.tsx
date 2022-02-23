@@ -37,7 +37,7 @@ export const Header = () => {
     return user.name.charAt(0)+user.family_name.charAt(0) || ""
     else return "";
   }
-
+  
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
