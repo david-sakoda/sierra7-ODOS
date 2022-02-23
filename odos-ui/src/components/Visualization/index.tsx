@@ -1,33 +1,42 @@
-// import styled from "@emotion/styled";
-// import { useEffect } from "react";
-// import { useQuery } from "react-query";
-// import { Dendogram, NewGraph } from "..";
-// import { config } from "../../config";
-// const D3Container = styled.div`
-//   height: calc(100% / 2);
-//   width: calc(100vw - 32px);
-//   .link {
-//     fill: none;
-//     stroke: #ccc;
-//     stroke-width: 1.5px;
-//   }
-//   margin-top: 32px;
-// `;
+// import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { RadialTree } from './radialTree';
+import { data1, data2 } from './data';
 
-// export const Visualization = () => {
-//   const { isLoading, error, data, isFetching } = useQuery("visualization", () =>
-//     fetch(
-//       `${config.api.URL}/odos/movies/visualization`
-//     ).then((res) => res.json())
-//   );
-//   useEffect(() => {
-//     //if (!isLoading) Dendogram({ height: 800, width: 800, data: data });
-//   }, [data, isLoading]);
+export const Visualization = () => {
+  
+  const [data, setData] = useState({});
+  const [gettingData, setGettingData] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-//   return <><D3Container id="d3-container" /></>;
-// };
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    // this should be replaced with an ajax call
+    const timeoutID = setTimeout(() => {
+      if (gettingData) {
+        setData(JSON.parse(JSON.stringify(data1)));
+      } else {
+        setData(JSON.parse(JSON.stringify(data2)));
+      }
+      setIsLoading(false);
+    }, 1000);
+    return () => {
+      clearTimeout(timeoutID);
+    };
+  }, [gettingData]);
+  
+  const invokeRoute = () => {
+    navigate('/dossier/1');
+  } 
+  const getData = () => {
+    setIsLoading(true);
+    setGettingData(!gettingData);
+  }
 
-export const Visualization = ()=> {
-  return <div><p>Visualization</p></div>
-}
+  return (
+    <RadialTree data={data} width={1200} height={1200} options={{ invokeRoute, getData, isLoading }} />
+  ) 
+
+};

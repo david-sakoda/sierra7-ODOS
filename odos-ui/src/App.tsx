@@ -68,7 +68,7 @@ function App() {
                     path="visualize"
                     element={
                       <PrivateRoute>
-                        <Visualization />
+                        <Visualization/>
                       </PrivateRoute>
                     }
                   />
