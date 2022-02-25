@@ -24,8 +24,8 @@ export default defineConfig({
       ignored:["/coverage/*"]
     },
     proxy: {
-      "/api/v1": {
-        target: "http://localhost:8000",
+      "/development": {
+        target: "https://34a0ombo6g.execute-api.us-east-1.amazonaws.com",
         changeOrigin: true,
       },
     },

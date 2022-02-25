@@ -6,6 +6,8 @@ import { useFetchMovies } from "@/hooks";
 import { useKeycloak } from "@react-keycloak/web";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+
+import InfiniteScroll from "react-infinite-scroller";
 const PageContainer = styled.div`
   display: flex;
   height: calc(100vh - 66px - 32px);
@@ -20,10 +22,10 @@ const PageContainer = styled.div`
   }
 `;
 const containerVariants = {
-  hidden: { opacity: 0, },
+  hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    
+
     transition: {
       delayChildren: 0.5,
       staggerChildren: 0.5,
@@ -31,7 +33,7 @@ const containerVariants = {
   },
 };
 
-const Container = motion(styled.ul`
+const Container = styled(InfiniteScroll)`
   height: calc(100vh - 66px - 32px - 24px);
   display: grid;
   grid-template-columns: repeat(auto-fill, 423px);
@@ -40,54 +42,67 @@ const Container = motion(styled.ul`
   gap: 24px;
   padding: 16px;
   list-style: none;
-`);
+`;
 
 export const Search = () => {
-  const { isLoading, error, data } = useFetchMovies();
+  const { error, data, hasNextPage, fetchNextPage } =
+    useFetchMovies();
   const user = useKeycloak();
   const navigate = useNavigate();
   const roleArray = user.keycloak.idTokenParsed?.resource_access
     ? user.keycloak.idTokenParsed.resource_access["odos-ui"].roles
     : [];
-  console.log(roleArray);
-  if (data && !isLoading)
+  console.log(data?.pages);
+  if (data && !error)
     return (
       <>
-      <PageContainer>
-        <TextField
-          id="search-field"
-          label="Search by movie title, actor, movie charactor"
-          variant="outlined"
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <SearchIcon />
-              </InputAdornment>
-            ),
-          }}
-        />
-          {!isLoading &&
-            !error &&
-            Array.isArray(data) &&
-        <Container variants={containerVariants} initial="hidden" animate="visible">
-            {data.map((e: any) => (
-              <MovieCard
-                id={e.id}
-                name={e.name}
-                description={e.description}
-                url={e.url}
-              />
-            ))}
-            
-        </Container>
-          }
-      </PageContainer>
+        <PageContainer>
+          <TextField
+            id="search-field"
+            label="Search by movie title, actor, movie charactor"
+            variant="outlined"
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <SearchIcon />
+                </InputAdornment>
+              ),
+            }}
+          />
+          {!error && (
+            <Container
+              // variants={containerVariants}
+              // initial="hidden"
+              // animate="visible"
+              hasMore={hasNextPage}
+              loadMore={() => fetchNextPage()}
+              loader={<h4>Loading...</h4>}
+              initialLoad={false}
+            >
+              {data.pages.map((page: any) => {
+                return page.results.map((movie: any) => (
+                  <MovieCard
+                    key={movie.id}
+                    id={movie.id}
+                    name={movie.name}
+                    description={movie.description}
+                    url={movie.url}
+                  />
+                ));
+              })}
+            </Container>
+          )}
+        </PageContainer>
         {roleArray.includes("SUPERVISOR") && (
-          <div className="AddButton" style={{
-            position: "sticky", zIndex: 1000,
-            bottom: "24px",
-            right: "24px"
-          }}>
+          <div
+            className="AddButton"
+            style={{
+              position: "sticky",
+              zIndex: 1000,
+              bottom: "24px",
+              right: "24px",
+            }}
+          >
             <Fab
               color="primary"
               label="add"
@@ -98,7 +113,7 @@ export const Search = () => {
             </Fab>
           </div>
         )}
-        </>
+      </>
     );
-  else return <Container />;
+  else return <div />;
 };
