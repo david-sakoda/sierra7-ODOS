@@ -1,0 +1,20 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: An ODOS template describing your function.
+Resources:
+  odosdataloadinit:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: app.lambda_handler
+      Runtime: python3.8
+      CodeUri: odos_init_app/
+      Description: ''
+      MemorySize: 128
+      Timeout: 5
+      Role: 'arn:aws:iam::543335889378:role/odos-lambda-role'
+      Events:
+        Api1:
+          Type: Api
+          Properties:
+            Path: /loadMovies
+            Method: ANY
