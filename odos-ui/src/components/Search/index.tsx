@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
 import InfiniteScroll from "react-infinite-scroller";
+import { useState } from "react";
 const PageContainer = styled.div`
   display: flex;
   height: calc(100vh - 66px - 32px);
@@ -45,15 +46,16 @@ const Container = styled(InfiniteScroll)`
 `;
 
 export const Search = () => {
+  const [search, setSearch] = useState<string | undefined>();
   const { error, data, hasNextPage, fetchNextPage } =
-    useFetchMovies();
+    useFetchMovies(search);
   const user = useKeycloak();
   const navigate = useNavigate();
   const roleArray = user.keycloak.idTokenParsed?.resource_access
     ? user.keycloak.idTokenParsed.resource_access["odos-ui"].roles
     : [];
-  console.log(data?.pages);
-  if (data && !error)
+  console.log(search);
+
     return (
       <>
         <PageContainer>
@@ -61,6 +63,8 @@ export const Search = () => {
             id="search-field"
             label="Search by movie title, actor, movie charactor"
             variant="outlined"
+            value={search}
+            onChange={(e)=>setSearch(e.target.value)}
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
@@ -79,7 +83,7 @@ export const Search = () => {
               loader={<h4>Loading...</h4>}
               initialLoad={false}
             >
-              {data.pages.map((page: any) => {
+              {data?.pages.map((page: any) => {
                 return page.results.map((movie: any) => (
                   <MovieCard
                     key={movie.id}
@@ -115,5 +119,5 @@ export const Search = () => {
         )}
       </>
     );
-  else return <div />;
+
 };
