@@ -12,7 +12,7 @@ import InfiniteScroll from "react-infinite-scroller";
 import { useState } from "react";
 const PageContainer = styled.div`
   display: flex;
-  height: calc(100vh - 66px - 32px);
+  min-height: calc(100vh - 66px - 32px);
   flex-direction: column;
   justify-items: center;
   margin: 16px;
@@ -21,6 +21,11 @@ const PageContainer = styled.div`
     z-index: 1000;
     bottom: 24px;
     right: 24px;
+  }
+  .loading{
+    display:flex;
+    justify-content: center;
+    margin: 32px;
   }
 `;
 const containerVariants = {
@@ -36,7 +41,7 @@ const containerVariants = {
 };
 
 const Container = styled(InfiniteScroll)`
-  height: calc(100vh - 66px - 32px - 24px);
+  min-height: calc(100vh - 66px - 32px - 24px);
   display: grid;
   grid-template-columns: repeat(auto-fill, 423px);
   grid-auto-rows: min-content;
@@ -51,7 +56,7 @@ export const Search = () => {
   const [searchValue] = useDebounce<string | undefined>(search, 1000);
   const theme = useTheme();
   const TabletUpMatch = useMediaQuery(theme.breakpoints.up("sm"));
-  const { error, data, hasNextPage, fetchNextPage } =
+  const { error, data, hasNextPage, fetchNextPage, isFetching } =
     useFetchMovies(searchValue);
   const user = useKeycloak();
   const navigate = useNavigate();
@@ -59,7 +64,7 @@ export const Search = () => {
     ? user.keycloak.idTokenParsed.resource_access["odos-ui"].roles
     : [];
  
-
+  console.log(`Fetching: ${isFetching}. Pages: ${data?.pages[0].results.length}`)
   return (
     <>
       <PageContainer>
@@ -80,6 +85,7 @@ export const Search = () => {
             ),
           }}
         />
+        {data?.pages[0].results.length === undefined && isFetching && <div className="loading"><CircularProgress /></div>}
         {!error && (
           <Container
             // variants={containerVariants}

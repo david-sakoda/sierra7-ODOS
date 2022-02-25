@@ -19,6 +19,8 @@ import {
   TableCell,
   TableRow,
   TextField,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import { MouseEventHandler, useEffect, useState } from "react";
 import {
@@ -31,14 +33,23 @@ import {
 import { Link as RouterLink, useParams, useNavigate } from "react-router-dom";
 import { useKeycloak } from "@react-keycloak/web";
 
+
+type StyledProps = {
+  isMobile: boolean;
+}
+
+
 const Container = styled.div`
   margin: 32px auto;
   justify-content: center;
   display: flex;
+  flex-flow: ${(props: StyledProps) => !props.isMobile ? "row" : "column" };
+  min-height: calc(100vh - 186px);
 
   #dossier-text:nth-child(2) {
     margin: 0px 32px;
-    width: 40%;
+    width: ${(props: StyledProps) => !props.isMobile ? "40%" : "auto" };
+
   }
   #cover {
     display: flex;
@@ -73,6 +84,8 @@ type formdata = {
 };
 
 export const UpsertMovie = ({ type }: Props) => {
+  const theme = useTheme();
+  const TabletUpMatch = useMediaQuery(theme.breakpoints.up("sm")); 
   const [formData, setFormData] = useState<formdata>({
     name: "",
     director: "",
@@ -84,12 +97,13 @@ export const UpsertMovie = ({ type }: Props) => {
   });
   const params = useParams();
   const [openSave, setOpenSave] = useState(false);
-
   const user = useKeycloak();
   const navigate = useNavigate();
   const roleArray = user.keycloak.idTokenParsed?.resource_access
     ? user.keycloak.idTokenParsed.resource_access["odos-ui"].roles
     : [];
+
+    console.log(TabletUpMatch)
 
   // Only call API on Edits, not Adds
   const { isLoading, data } = useFetchMovieDossier(params.id, type === "edit");
@@ -117,7 +131,7 @@ export const UpsertMovie = ({ type }: Props) => {
   if ((formData.name !== "" && data && !isLoading) || type === "add") {
     return (
       <>
-      <Container>
+      <Container isMobile={!TabletUpMatch}>
         <div id="cover">
           {formData.url ? (
             <CoverImage name={formData.name} url={formData.url} />
@@ -215,5 +229,5 @@ export const UpsertMovie = ({ type }: Props) => {
       )}
       </>
     );
-  } else return <Container />;
+  } else return <div />;
 };

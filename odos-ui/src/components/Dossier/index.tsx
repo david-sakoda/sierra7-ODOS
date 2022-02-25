@@ -137,7 +137,7 @@ export const Dossier = () => {
           }
           isOpen={openDelete}
           setIsOpen={setOpenDelete}
-          actions={[{ text: "Proceed", autoFocus: false },
+          actions={[{ text: "Proceed", autoFocus: false, onClickFunction:()=>{navigate("/")}},
           { text: "Cancel", autoFocus: true }]}
         />
       </Container>
