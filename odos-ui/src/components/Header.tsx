@@ -9,8 +9,10 @@ import {
   MenuList,
   Toolbar,
   Tooltip,
-  Typography
+  Typography,
+  useMediaQuery
 } from "@mui/material";
+import { useTheme } from "@mui/system";
 import { useKeycloak } from "@react-keycloak/web";
 import { useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
@@ -23,11 +25,13 @@ export const Header = () => {
   const appTitle = "RetroPaper Movie Spider";
   const [anchorElUser, setAnchorElUser] = useState(null);
   const user = keycloak.idTokenParsed || {};
-
+  const theme = useTheme();
+  const TabletUpMatch = useMediaQuery(theme.breakpoints.up("sm"));
   const handleOpenUserMenu = (event: any) => {
     setAnchorElUser(event.currentTarget);
   };
 
+  console.log(TabletUpMatch)
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
@@ -40,7 +44,7 @@ export const Header = () => {
   
   return (
     <AppBar position="static">
-      <Container maxWidth="xl">
+      <Container style={{maxWidth: "100%"}}>
         <Toolbar disableGutters sx={{ justifyContent: "space-between" }}>
           <Typography
             variant="h6"
@@ -61,7 +65,7 @@ export const Header = () => {
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} >
                 {user && user.name && user.avatar ? <Avatar alt={user?.name} src={ `/images/${user.avatar}`} sx={{height: 50, width: 50,}}/> :<Avatar alt={user?.name} sx={{height: 50, width: 50,}}>{getInitials()}</Avatar> }
-                <Typography variant="body1" sx={{paddingLeft: 1, color: "white"}}>{user?.name}</Typography>
+                {TabletUpMatch.valueOf() && <Typography className="username" variant="body1" sx={{paddingLeft: 1, color: "white"}}>{user?.name}</Typography>}
               </IconButton>
             </Tooltip>
             <Menu

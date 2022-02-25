@@ -7,6 +7,8 @@ import {
   CardMedia,
   Link,
   Typography,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import { FunctionComponent } from "react";
 import { Link as RouterLink } from "react-router-dom";
@@ -27,11 +29,15 @@ const item = {
   },
 };
 
+type StyledProps = {
+  isMobile: boolean;
+}
+
 const StyledCard = styled(Card)`
   display: flex;
   height: 250px;
-  width: 423px;
-  margin: 0 auto 0 0;
+  width: ${(props: StyledProps) => !props.isMobile ? "423px" : "343px" };
+  margin: ${(props: StyledProps) => !props.isMobile ? "0 auto 0 0" : "0" };
   border-radius: 1rem;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
   transform: perspective(3000px) rotateY(5deg);
@@ -47,9 +53,12 @@ export const MovieCard: FunctionComponent<Movie> = ({
   description,
   url,
 }) => {
+
+  const theme = useTheme();
+  const TabletUpMatch = useMediaQuery(theme.breakpoints.up("sm"));
   return (
-    <motion.li key={id} initial="hidden" animate="visible" variants={item}>
-      <StyledCard>
+    <motion.li key={id} initial="hidden" animate="visible" variants={item} style={{display:"flex", justifyContent: "center"}}>
+      <StyledCard isMobile={!TabletUpMatch}>
         <CardMedia
           component="img"
           image={url}
