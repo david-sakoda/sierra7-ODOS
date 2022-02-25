@@ -3,7 +3,7 @@ import { useInfiniteQuery } from "react-query";
 
 export const useFetchMovies = (search?: string) => {
   const pageSize = 15;
-
+  if(search && search?.length < 3) search = undefined;
   const {
     status,
     data,
