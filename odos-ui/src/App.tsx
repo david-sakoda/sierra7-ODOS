@@ -43,7 +43,7 @@ function App() {
                     <Route
                       path="dossier/:id/edit"
                       element={
-                        <PrivateRoute>
+                        <PrivateRoute role="SUPERVISOR">
                           <UpsertMovie type="edit" />
                         </PrivateRoute>
                       }
@@ -51,7 +51,7 @@ function App() {
                     <Route
                       path="add"
                       element={
-                        <PrivateRoute>
+                        <PrivateRoute role="SUPERVISOR">
                           <UpsertMovie type="add" />
                         </PrivateRoute>
                       }

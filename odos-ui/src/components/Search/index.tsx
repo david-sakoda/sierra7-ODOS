@@ -97,7 +97,7 @@ export const Search = () => {
           </div>
         )}
 
-        {!error && (
+        {!error && data && (
           <Container
             // variants={containerVariants}
             // initial="hidden"
@@ -107,7 +107,7 @@ export const Search = () => {
             loader={<CircularProgress />}
             initialLoad={false}
           >
-            {data?.pages.map((page: any) => {
+            {data.pages.map((page: any) => {
               return page.results.map((movie: any) => (
                 <MovieCard
                   key={movie.id}
