@@ -13,6 +13,7 @@ import {
 import { ModalDialog, CoverImage } from "@/components";
 import { useState } from "react";
 import { Link as RouterLink, useNavigate, useParams } from "react-router-dom";
+import { useKeycloak } from "@react-keycloak/web";
 
 const Container = styled.div`
   margin: 32px auto;
@@ -42,6 +43,13 @@ export const Dossier = () => {
   const params = useParams();
   const [openDelete, setOpenDelete] = useState(false);
   const navigate = useNavigate();
+  const {keycloak} = useKeycloak();
+
+  const keycloakRoles =
+    keycloak.idTokenParsed && keycloak.idTokenParsed.resource_access
+      ? keycloak.idTokenParsed.resource_access["odos-ui"]?.roles
+      : null;
+
   const handleClickOpen = () => {
     setOpenDelete(true);
   };
@@ -55,7 +63,7 @@ export const Dossier = () => {
       <Container>
         <div id="cover">
           <CoverImage name={data.name} url={data.url} />
-          <IconButton
+          {keycloakRoles && keycloakRoles.includes("SUPERVISOR") &&<IconButton
             color="primary"
             aria-label="Edit Movie"
             component="span"
@@ -67,11 +75,11 @@ export const Dossier = () => {
             }}
           >
             <EditOutlined />
-          </IconButton>
+          </IconButton>}
           
         </div>
         <TextContainer>
-          <h2>{data.name}<IconButton
+          <h2>{data.name}{keycloakRoles && keycloakRoles.includes("SUPERVISOR") &&<IconButton
             color="error"
             aria-label="Delete Movie"
             component="span"
@@ -83,7 +91,7 @@ export const Dossier = () => {
             }}
           >
             <DeleteForeverOutlined />
-          </IconButton></h2>
+          </IconButton>}</h2>
           <Button variant="text">
             <Link component={RouterLink} to="/visualize">
               VIEW REPORT
