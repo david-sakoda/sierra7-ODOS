@@ -3,7 +3,8 @@ import { useInfiniteQuery } from "react-query";
 
 export const useFetchMovies = (search?: string) => {
   const pageSize = 15;
-  if(search && search?.length < 3) search = undefined;
+  if(search && search?.length < 3) search = undefined 
+  
   const {
     status,
     data,
@@ -18,8 +19,9 @@ export const useFetchMovies = (search?: string) => {
   } = useInfiniteQuery(
     ["repoData",search],
     async ({ pageParam = 0 }) => {
+      
       const results = await fetch(
-        `${import.meta.env.VITE_API_URL}/movies/${!search ? "all" : `/moviesearch/${search}`}?from=${pageParam}&size=${pageSize}`,
+        `${import.meta.env.VITE_API_URL}/movies/${!search ? "all" : `moviesearch/${encodeURIComponent(search)}`}?from=${pageParam}&size=${pageSize}`,
         {
           mode: "cors",
         }

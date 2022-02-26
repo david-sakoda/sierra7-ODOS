@@ -1,15 +1,20 @@
-import styled from "@emotion/styled";
-import { Search as SearchIcon, Add as AddIcon } from "@mui/icons-material";
-import { InputAdornment, TextField, CircularProgress, responsiveFontSizes, useMediaQuery, useTheme } from "@mui/material";
-import { MovieCard, Fab } from "@/components";
+import { Fab, MovieCard } from "@/components";
 import { useFetchMovies } from "@/hooks";
+import styled from "@emotion/styled";
+import { Add as AddIcon, Search as SearchIcon } from "@mui/icons-material";
+import {
+  CircularProgress,
+  InputAdornment,
+  TextField,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import { useKeycloak } from "@react-keycloak/web";
+import { useState } from "react";
+import InfiniteScroll from "react-infinite-scroller";
 import { useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
 import { useDebounce } from "use-debounce";
 
-import InfiniteScroll from "react-infinite-scroller";
-import { useState } from "react";
 const PageContainer = styled.div`
   display: flex;
   min-height: calc(100vh - 66px - 32px);
@@ -22,8 +27,8 @@ const PageContainer = styled.div`
     bottom: 24px;
     right: 24px;
   }
-  .loading{
-    display:flex;
+  .loading {
+    display: flex;
     justify-content: center;
     margin: 32px;
   }
@@ -63,8 +68,7 @@ export const Search = () => {
   const roleArray = user.keycloak.idTokenParsed?.resource_access
     ? user.keycloak.idTokenParsed.resource_access["odos-ui"].roles
     : [];
- 
-  console.log(`Fetching: ${isFetching}. Pages: ${data?.pages[0].results.length}`)
+
   return (
     <>
       <PageContainer>
@@ -73,7 +77,9 @@ export const Search = () => {
           label="Search by movie title, actor, movie charactor"
           variant="outlined"
           value={search}
-          InputLabelProps={{style:{fontSize: `${TabletUpMatch ? "1rem": "0.9rem"}`}}}
+          InputLabelProps={{
+            style: { fontSize: `${TabletUpMatch ? "1rem" : "0.9rem"}` },
+          }}
           onChange={(e) => {
             setSearch(e.target.value);
           }}
@@ -85,7 +91,12 @@ export const Search = () => {
             ),
           }}
         />
-        {data?.pages[0].results.length === undefined && isFetching && <div className="loading"><CircularProgress /></div>}
+        {data?.pages[0].results.length === undefined && isFetching && (
+          <div className="loading">
+            <CircularProgress />
+          </div>
+        )}
+
         {!error && (
           <Container
             // variants={containerVariants}
