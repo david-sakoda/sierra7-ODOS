@@ -10,7 +10,7 @@ import {
   useTheme,
 } from "@mui/material";
 import { useKeycloak } from "@react-keycloak/web";
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import InfiniteScroll from "react-infinite-scroller";
 import { useNavigate } from "react-router-dom";
 import { useDebounce } from "use-debounce";
@@ -57,8 +57,8 @@ const Container = styled(InfiniteScroll)`
 `;
 
 export const Search = () => {
-  const [search, setSearch] = useState<string | undefined>();
-  const [searchValue] = useDebounce<string | undefined>(search, 1000);
+  const [search, setSearch] = useState<string>("");
+  const [searchValue] = useDebounce<string>(search, 1000);
   const theme = useTheme();
   const TabletUpMatch = useMediaQuery(theme.breakpoints.up("sm"));
   const { error, data, hasNextPage, fetchNextPage, isFetching } =
@@ -93,7 +93,7 @@ export const Search = () => {
         />
         {data?.pages[0].results.length === undefined && isFetching && (
           <div className="loading">
-            <CircularProgress />
+            <CircularProgress key="loader" />
           </div>
         )}
 
@@ -104,18 +104,20 @@ export const Search = () => {
             // animate="visible"
             hasMore={hasNextPage}
             loadMore={() => fetchNextPage()}
-            loader={<CircularProgress />}
+            loader={<CircularProgress key="loader" />}
             initialLoad={false}
           >
             {data.pages.map((page: any) => {
-              return page.results.map((movie: any) => (
-                <MovieCard
-                  key={movie.id}
-                  id={movie.id}
-                  name={movie.name}
-                  description={movie.description}
-                  url={movie.url}
-                />
+              return page.results.map((movie: any, index: number) => (
+                <Fragment key={index}>
+                  <MovieCard
+                    key={movie.id}
+                    id={movie.id}
+                    name={movie.name}
+                    description={movie.description}
+                    url={movie.url}
+                  />
+                </Fragment>
               ));
             })}
           </Container>

@@ -30,7 +30,7 @@ export const ModalDialog = ({
   actions,
 }: Props) => {
   const handleClose = () => {
-    setIsOpen.call(null,false);
+    setIsOpen.call(null, false);
   };
   return (
     <Dialog
@@ -46,16 +46,18 @@ export const ModalDialog = ({
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        {actions.map((action) => {
+        {actions.map((action, index) => {
           const onClick = action.onClickFunction
             ? action.onClickFunction
             : handleClose;
           return action.autoFocus ? (
-            <Button onClick={onClick} autoFocus>
+            <Button onClick={onClick} autoFocus key={index}>
               {action.text}
             </Button>
           ) : (
-            <Button onClick={onClick}>{action.text}</Button>
+            <Button onClick={onClick} key={index}>
+              {action.text}
+            </Button>
           );
         })}
       </DialogActions>

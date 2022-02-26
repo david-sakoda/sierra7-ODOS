@@ -9,25 +9,36 @@ import {
   TableBody,
   TableCell,
   TableRow,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import { ModalDialog, CoverImage } from "@/components";
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { Link as RouterLink, useNavigate, useParams } from "react-router-dom";
 import { useKeycloak } from "@react-keycloak/web";
+
+type StyledProps = {
+  isMobile: boolean;
+};
 
 const Container = styled.div`
   margin: 32px auto;
   justify-content: center;
   display: flex;
+  flex-flow: ${(props: StyledProps) => (!props.isMobile ? "row" : "column")};
 
   div:nth-child(2) {
     margin: 0px 32px;
-    width: 40%;
+    width: ${(props: StyledProps) => (!props.isMobile ? "40%" : "auto")};
   }
   #cover {
     display: flex;
     flex-direction: column;
-    align-content: flex-end;
+    align-content: ${(props: StyledProps) =>
+      !props.isMobile ? "flex-start" : "center"};
+    align-items: ${(props: StyledProps) =>
+      !props.isMobile ? "flex-start" : "center"};
+    margin-bottom: 16px;
   }
 `;
 
@@ -35,15 +46,14 @@ const TextContainer = styled.div`
   text-align: left;
 `;
 
-
-
-
 export const Dossier = () => {
   // const [queryRefetch, setQueryFetch] = useState(true);
+  const theme = useTheme();
+  const TabletUpMatch = useMediaQuery(theme.breakpoints.up("sm"));
   const params = useParams();
   const [openDelete, setOpenDelete] = useState(false);
   const navigate = useNavigate();
-  const {keycloak} = useKeycloak();
+  const { keycloak } = useKeycloak();
 
   const keycloakRoles =
     keycloak.idTokenParsed && keycloak.idTokenParsed.resource_access
@@ -60,38 +70,44 @@ export const Dossier = () => {
   const { isLoading, data } = useFetchMovieDossier(params.id);
   if (data && !isLoading)
     return (
-      <Container>
+      <Container isMobile={!TabletUpMatch}>
         <div id="cover">
           <CoverImage name={data.name} url={data.url} />
-          {keycloakRoles && keycloakRoles.includes("SUPERVISOR") &&<IconButton
-            color="primary"
-            aria-label="Edit Movie"
-            component="span"
-            onClick={()=>navigate(`/dossier/${params.id}/edit`)}
-            sx={{
-              justifyContent: "flex-end",
-              width: "fit-content",
-              alignSelf: "flex-end",
-            }}
-          >
-            <EditOutlined />
-          </IconButton>}
-          
+          {keycloakRoles && keycloakRoles.includes("SUPERVISOR") && (
+            <IconButton
+              color="primary"
+              aria-label="Edit Movie"
+              component="span"
+              onClick={() => navigate(`/dossier/${params.id}/edit`)}
+              sx={{
+                justifyContent: "flex-end",
+                width: "fit-content",
+                alignSelf: "flex-end",
+              }}
+            >
+              <EditOutlined />
+            </IconButton>
+          )}
         </div>
         <TextContainer>
-          <h2>{data.name}{keycloakRoles && keycloakRoles.includes("SUPERVISOR") &&<IconButton
-            color="error"
-            aria-label="Delete Movie"
-            component="span"
-            onClick={handleClickOpen}
-            sx={{
-              justifyContent: "flex-end",
-              width: "fit-content",
-              alignSelf: "flex-end",
-            }}
-          >
-            <DeleteForeverOutlined />
-          </IconButton>}</h2>
+          <h2>
+            {data.name}
+            {keycloakRoles && keycloakRoles.includes("SUPERVISOR") && (
+              <IconButton
+                color="error"
+                aria-label="Delete Movie"
+                component="span"
+                onClick={handleClickOpen}
+                sx={{
+                  justifyContent: "flex-end",
+                  width: "fit-content",
+                  alignSelf: "flex-end",
+                }}
+              >
+                <DeleteForeverOutlined />
+              </IconButton>
+            )}
+          </h2>
           <Button variant="text">
             <Link component={RouterLink} to="/visualize">
               VIEW REPORT
@@ -110,8 +126,8 @@ export const Dossier = () => {
               <TableRow>
                 <TableCell variant="head">Starring:</TableCell>
                 <TableCell>
-                  {data.actors.map((a: any) => (
-                    <>
+                  {data.actors.map((a: any, index: number) => (
+                    <Fragment key={index}>
                       <Link component={RouterLink} to="/visualize">
                         {a.name}
                       </Link>{" "}
@@ -120,7 +136,7 @@ export const Dossier = () => {
                         {a.character}
                       </Link>
                       <br />
-                    </>
+                    </Fragment>
                   ))}
                 </TableCell>
               </TableRow>
@@ -136,7 +152,10 @@ export const Dossier = () => {
               </TableRow>
             </TableBody>
           </Table>
-          <div id="description" dangerouslySetInnerHTML={{__html: data.description}} />
+          <div
+            id="description"
+            dangerouslySetInnerHTML={{ __html: data.description }}
+          />
         </TextContainer>
         <ModalDialog
           title={`Delete - ${data.name}`}
@@ -145,10 +164,18 @@ export const Dossier = () => {
           }
           isOpen={openDelete}
           setIsOpen={setOpenDelete}
-          actions={[{ text: "Proceed", autoFocus: false, onClickFunction:()=>{navigate("/")}},
-          { text: "Cancel", autoFocus: true }]}
+          actions={[
+            {
+              text: "Proceed",
+              autoFocus: false,
+              onClickFunction: () => {
+                navigate("/");
+              },
+            },
+            { text: "Cancel", autoFocus: true },
+          ]}
         />
       </Container>
     );
-  else return <Container />;
+  else return <div />;
 };
