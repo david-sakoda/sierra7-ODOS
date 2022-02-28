@@ -1,0 +1,38 @@
+{
+    "Records": [
+      {
+        "eventVersion": "2.1",
+        "eventSource": "aws:s3",
+        "awsRegion": "us-east-1",
+        "eventTime": "2022-02-28T01:53:29.781Z",
+        "eventName": "ObjectCreated:Put",
+        "userIdentity": {
+          "principalId": "AWS:AIDAX5AKXXHRKLAJTE7ME"
+        },
+        "requestParameters": {
+          "sourceIPAddress": "108.40.125.36"
+        },
+        "responseElements": {
+          "x-amz-request-id": "VHNVZ6QWBK4Z2W6S",
+          "x-amz-id-2": "A6YIG6l9RuBFFRz6QDZwvrIFxdfbzUgnOmT7BqdNByX04+OFkfJ35yIJ4bBBH4vJyj6KvpiBUl7QJ6DSA2+wOzN3emjsWWjO"
+        },
+        "s3": {
+          "s3SchemaVersion": "1.0",
+          "configurationId": "f93f851d-42b5-4314-9c2e-185137960b83",
+          "bucket": {
+            "name": "odos-dataload-init",
+            "ownerIdentity": {
+              "principalId": "A32N7P0HDUE15D"
+            },
+            "arn": "arn:aws:s3:::odos-dataload-init"
+          },
+          "object": {
+            "key": "movies.dat",
+            "size": 75,
+            "eTag": "6db26bbc9c5014cd54998307b9914dd7",
+            "sequencer": "00621C2B19AFF29913"
+          }
+        }
+      }
+    ]
+  }
