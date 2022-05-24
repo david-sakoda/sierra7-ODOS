@@ -1,4 +1,4 @@
-FROM jboss/keycloak:15.0.2
+FROM jboss/keycloak:15.1.0
 
 # Copy Custom resources into the container
 COPY themes /opt/jboss/keycloak/themes
