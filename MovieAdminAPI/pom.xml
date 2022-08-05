@@ -38,7 +38,7 @@
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <version>42.3.3</version>
+            <version>42.4.1</version>
         </dependency>
         <dependency>
             <groupId>io.searchbox</groupId>
@@ -60,8 +60,7 @@
                 <version>3.2.4</version>
                 <configuration>
                     <transformers>
-                        <transformer
-                                implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer"/>
+                        <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer"/>
                     </transformers>
                 </configuration>
                 <executions>
